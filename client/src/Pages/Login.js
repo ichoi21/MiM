@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import UserContext from "../Context/UserContext";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
-import MiM from "../Img/MIM_logo.png";
+
 
 const Login = () => {
   const { userData, setUserData } = useContext(UserContext);
