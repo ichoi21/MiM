@@ -58,6 +58,7 @@ const Login = () => {
 export default Login;
 
 
+<<<<<<< HEAD
 //what danielle added with material ui commented out. 
 
 
