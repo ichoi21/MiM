@@ -17,6 +17,7 @@ A dashboard which assist the user with their stocks investment portfolio.
 
 [![All Contributors](https://img.shields.io/badge/contributors-3-yellow)](#contributors-)
 
+- [Danielle Arias](https://github.com/drias321)
 - [Myhkas Nallas](https://github.com/mnallas)
 - [Michelle Tran](https://github.com/m-tran)
 - [Ian Choi](https://github.com/ichoi21)
@@ -68,7 +69,7 @@ In development - [GitHub](https://github.com/ichoi21/MiM)
 
 ## Future Development
 
-- Technnical Analaysis
+- Technical Analysis
 - Premium Stock Fundamentals
 - WebSocket
 - Webhook
