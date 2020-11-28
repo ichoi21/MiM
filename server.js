@@ -13,6 +13,7 @@ app.use(cors());
 
 // setup routes
 app.use("/users", require("./routes/userRoutes"));
+app.use("/users", require("./routes/apiRoutes"));
 
 // setup mongoose
 mongoose.connect(
@@ -39,5 +40,6 @@ if (process.env.NODE_ENV === "production") {
 // setup routes
 
 app.use("/users", require("./routes/userRoutes"));
+app.use("/", require("./routes/apiRoutes"));
 
 app.listen(PORT, () => console.log(`Listening at: http://localhost:${PORT}`));

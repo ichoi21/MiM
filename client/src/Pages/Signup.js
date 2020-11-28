@@ -60,7 +60,7 @@ const Signup = () => {
         onChange={onChange}
         type="text"
         name="displayName"
-        placeholder="passwordCheck"
+        placeholder="Display Name"
       ></input>
 
       <input type="submit"></input>
