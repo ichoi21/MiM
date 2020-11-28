@@ -1,1 +1,1 @@
-const { FINNHUB_API_KEY } = process.env;
+const { FINNHUB_TOKEN } = process.env;
