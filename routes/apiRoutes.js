@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+const express = require("express");
+const Axios = require("axios");
+const auth = require("../middleware/auth");
+//const ProfileRouter = express.Router();
+
+//load Profile
+
+//load FinHub
+=======
 const router = require("express").Router();
 const Axios = require("axios");
 
@@ -23,3 +33,4 @@ router.post("/quote", async (req,res) => {
 })
 
 module.exports = router;
+>>>>>>> 98ef8403ea16b614176dc1445821309f132a9aea
