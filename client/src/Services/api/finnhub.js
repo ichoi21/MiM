@@ -22,7 +22,7 @@ const finnhub = () => {
             });
             setfinnhubState({ ...finnhubState, result });
         } catch (err) {
-            throw new Error('Unable to get data.')
+            throw new Error('Unabl e to get data.')
         }
     }, []);
 
