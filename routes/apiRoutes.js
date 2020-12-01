@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-const express = require("express");
+const router = require("express").Router();
 const Axios = require("axios");
 const auth = require("../middleware/auth");
 //const ProfileRouter = express.Router();
@@ -7,14 +6,11 @@ const auth = require("../middleware/auth");
 //load Profile
 
 //load FinHub
-=======
-const router = require("express").Router();
-const Axios = require("axios");
 
 router.post("/quote", async (req,res) => {
     try{
         let result = {}
-        let symbol = req.body.symbol
+        let symbol = "AAPL"
       await Axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${process.env.FIN_TOKEN}`)
       .then((res)=> result.quote = res.data)
       await Axios.get(`https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${process.env.FIN_TOKEN}`)
@@ -33,4 +29,3 @@ router.post("/quote", async (req,res) => {
 })
 
 module.exports = router;
->>>>>>> 98ef8403ea16b614176dc1445821309f132a9aea
