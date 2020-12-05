@@ -8,17 +8,16 @@ const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
 
-const [search, setSearch] = useState("");
-const [quote, setQuote] = useState([]);
+// const [search, setSearch] = useState("");
+// const [quote, setQuote] = useState([]);
 
-const getQuote = (e) =>{
-    e.preventDefault();
-    Axios.get(
-        `/user/quote`
-      ).then((res) => {
-        setQuote(res.data);
+const getQuote = () =>{
+     Axios.post(
+         `/users/quote`
+       ).then((res) => {
+    //  setQuote(res.data);
         console.log(res.data);
-      });
+       });
     }
     
 
@@ -30,7 +29,7 @@ const getQuote = (e) =>{
   return (
     <>
   <h1>dMiM $tock search</h1>
-  <SearchBar onChange={(e) => setSearch(e.target.value)} onSubmit={()=> getQuote()}/>
+  <SearchBar onClick={getQuote}/>
   </>
     );
 };
