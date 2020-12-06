@@ -5,11 +5,12 @@ import SearchBar from "../Components/SearchBar";
 import Card from "../Components/Card";
 import Axios from "axios";
 import {Col, Row} from 'reactstrap';
+import finnhub from "../Services/api/finnhub";
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
-  const indices = ["S&P 500", "NASDAQ", "Dow-Jones", "FTSE 100", "Russell"];
+  const indices = ["S&P 500", "NASDAQ", "DIJA", "RUSSELL", "VIX"];
 
 const [search, setSearch] = useState("");
 // const [quote, setQuote] = useState([]);
@@ -48,7 +49,7 @@ const getQuote = (e) =>{
     })}
   </Row>
   <SearchBar onChange={ (e)=>setSearch(e.target.value)} onClick={getQuote}/>
-  <Card text={"Hello"}/>
+  <Card text={finnhub}/>
   </>
     );
 };
