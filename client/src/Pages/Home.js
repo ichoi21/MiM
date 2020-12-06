@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../Context/UserContext";
 import SearchBar from "../Components/SearchBar";
+import Card from "../Components/Card";
 import Axios from "axios";
 
 const Home = () => {
@@ -36,6 +37,7 @@ const getQuote = (e) =>{
     <>
   <h1>dMiM $tock search</h1>
   <SearchBar onChange={ (e)=>setSearch(e.target.value)} onClick={getQuote}/>
+  <Card/>
   </>
     );
 };
