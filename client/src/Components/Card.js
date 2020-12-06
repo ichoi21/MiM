@@ -4,12 +4,12 @@ import {
   CardTitle, CardSubtitle
 } from 'reactstrap';
 
-const TickerCard = ({open, high, volume, aveVol, fhigh}) => {
+const TickerCard = ({text, open, high, volume, aveVol, fhigh}) => {
   return (
     <div>
       <Card>
         <CardBody>
-          <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+          <CardText>{text}</CardText>
         </CardBody>
       </Card>
     </div>
