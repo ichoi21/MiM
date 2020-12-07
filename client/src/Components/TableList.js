@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 
 import React from 'react';
-import finnhub from '../Services/api/finnhub';
+// import finnhub from '../Services/api/finnhub';
 
 const TableList = (props) => {
     return (

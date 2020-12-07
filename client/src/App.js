@@ -53,7 +53,8 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {!userData.user ? (
+      <div>
+      {!userData.user ? (
           <>
             <Link to="/signup">Signup</Link>
             <Link to="/login">Login</Link>
@@ -63,6 +64,8 @@ function App() {
             Logout
           </Link>
         )}
+      </div>
+
 
         <UserContext.Provider value={{ userData, setUserData }}>
           <Switch>
