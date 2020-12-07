@@ -5,22 +5,20 @@ import SearchBar from "../Components/SearchBar";
 import Card from "../Components/Card";
 import TableList from "../Components/TableList";
 import TableBody from "../Components/TableBody";
+import SearchContent from "../Components/SearchContent";
 import Axios from "axios";
 import {Col, Row} from 'reactstrap';
-import finnhub from "../Services/api/finnhub";
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
   const indices = ["S&P 500", "NASDAQ", "DIJA", "RUSSELL", "VIX"];
-
   const sampleWatch = ["TSLA", "AAPL", "FCEL"];
-
-
 
 const [search, setSearch] = useState("");
 // const [quote, setQuote] = useState([]);
 const [error, setError] = useState();
+const [result, setResult] = useState([]);
 
 const getQuote = (e) =>{
   e.preventDefault();
@@ -28,8 +26,7 @@ const getQuote = (e) =>{
      Axios.get(
       `/users/quote/${search}`
     ).then((res) => {
- //  setQuote(res.data);
-     console.log(res.data);
+   setResult(res.data);
     });
   }
   catch (err) {
@@ -55,7 +52,9 @@ const getQuote = (e) =>{
     })}
   </Row>
   <SearchBar onChange={ (e)=>setSearch(e.target.value)} onClick={getQuote}/>
-  <Card/>
+  <Card>
+    <SearchContent ticker={"AAPL"} name={"Apple"}/>
+  </Card>
   <TableList>
   {(sampleWatch.map((item, index) => {
       return (
