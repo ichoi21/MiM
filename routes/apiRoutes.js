@@ -7,12 +7,14 @@ const auth = require("../middleware/auth");
 
 //load FinHub
 
-router.post("/quote", async (req,res) => {
+router.get("/quote/:symbol", async (req,res) => {
     try{
         let result = {}
-        let symbol = "AAPL"
+        const symbol = req.params.symbol
       await Axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${process.env.FIN_TOKEN}`)
       .then((res)=> result.quote = res.data)
+      await Axios.get(`https://finnhub.io/api/v1//stock/metric?symbol=${symbol}&metric=all&token=${process.env.FIN_TOKEN}`)
+      .then((res)=> result.financial = res.data)
       await Axios.get(`https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${process.env.FIN_TOKEN}`)
       .then((res) => result.profile = res.data)
       await Axios.get(`https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=2020-04-30&to=2020-05-01&token=${process.env.FIN_TOKEN}`)
