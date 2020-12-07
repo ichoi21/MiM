@@ -3,14 +3,20 @@ import { useHistory } from "react-router-dom";
 import UserContext from "../Context/UserContext";
 import SearchBar from "../Components/SearchBar";
 import Card from "../Components/Card";
+import TableList from "../Components/TableList";
+import TableBody from "../Components/TableBody";
 import Axios from "axios";
 import {Col, Row} from 'reactstrap';
-import finnhub from "../Services/api/finnhub";
+// import finnhub from "../Services/api/finnhub";
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
   const indices = ["S&P 500", "NASDAQ", "DIJA", "RUSSELL", "VIX"];
+
+  const sampleWatch = ["TSLA", "AAPL", "FCEL"];
+
+
 
 const [search, setSearch] = useState("");
 // const [quote, setQuote] = useState([]);
@@ -49,7 +55,15 @@ const getQuote = (e) =>{
     })}
   </Row>
   <SearchBar onChange={ (e)=>setSearch(e.target.value)} onClick={getQuote}/>
-  <Card text={finnhub}/>
+  <Card/>
+  <TableList>
+  {(sampleWatch.map((item, index) => {
+      return (
+<TableBody key={index} ticker={item} name={item} />
+      
+      )
+    }))}
+  </TableList>
   </>
     );
 };
