@@ -5,22 +5,20 @@ import SearchBar from "../Components/SearchBar";
 import Card from "../Components/Card";
 import TableList from "../Components/TableList";
 import TableBody from "../Components/TableBody";
+import SearchContent from "../Components/SearchContent";
 import Axios from "axios";
 import {Col, Row} from 'reactstrap';
-import finnhub from "../Services/api/finnhub";
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
   const indices = ["S&P 500", "NASDAQ", "DIJA", "RUSSELL", "VIX"];
-
   const sampleWatch = ["TSLA", "AAPL", "FCEL"];
-
-
 
 const [search, setSearch] = useState("");
 // const [quote, setQuote] = useState([]);
 const [error, setError] = useState();
+const [result, setResult] = useState([]);
 
 const getQuote = (e) =>{
   e.preventDefault();
@@ -28,8 +26,8 @@ const getQuote = (e) =>{
      Axios.get(
       `/users/quote/${search}`
     ).then((res) => {
- //  setQuote(res.data);
-     console.log(res.data);
+  setResult(res.data);
+   console.log(res.data);
     });
   }
   catch (err) {
@@ -55,7 +53,43 @@ const getQuote = (e) =>{
     })}
   </Row>
   <SearchBar onChange={ (e)=>setSearch(e.target.value)} onClick={getQuote}/>
-  <Card/>
+  {Object.keys(result).map((item)=>{
+    return (
+<Card>
+    <SearchContent 
+    ticker={result.financial.symbol}
+    name={result.profile.name}
+    open={result.quote.o}
+    high={result.quote.h}
+    // vol={}
+    threeMonth={result.financial.metric["3MonthAverageTradingVolume"]}
+    fwh={result.financial.metric["52WeekHigh"]}
+    marketCap={result.financial.metric.marketCapitalization}
+    // pefwd={}
+    eps={result.financial.metric.epsBasicExclExtraItemsAnnual}
+    // pturnover={}
+    // sharesOut={}
+    // ffmc={}
+    // lotSize={}
+    last={result.quote.pc}
+    low={result.quote.l}
+    turnover={result.financial.metric.inventoryTurnoverTTM}
+    // range={}
+    fwl={result.financial.metric["52WeekLow"]}
+    // pettm={}
+    dividend={result.financial.metric.dividendsPerShareTTM}
+    divYield={result.financial.metric.dividendYieldIndicatedAnnual}
+    pb={result.financial.metric.payoutRatioTTM}
+    // freeFloat={}
+    beta={result.financial.metric.beta}
+    // edd={}
+
+
+     />
+  </Card>
+    )
+  })}
+  
   <TableList>
   {(sampleWatch.map((item, index) => {
       return (
