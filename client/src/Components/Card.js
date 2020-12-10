@@ -4,12 +4,12 @@ import {
   CardTitle, CardSubtitle
 } from 'reactstrap';
 
-const TickerCard = ({text, open, high, volume, aveVol, fhigh}) => {
+const TickerCard = (props) => {
   return (
     <div>
       <Card>
         <CardBody>
-          <CardText>{text}</CardText>
+  <CardText>{props.children}</CardText>
         </CardBody>
       </Card>
     </div>
