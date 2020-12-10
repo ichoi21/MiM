@@ -17,9 +17,7 @@ const TableList = (props) => {
                 <th>LOW</th>
             </tr>
             </thead>
-            <tbody>                
-                {props.children}
-            </tbody>
+            {props.children}
         </Table>
     )
 }
