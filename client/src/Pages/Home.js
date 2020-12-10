@@ -8,6 +8,7 @@ import TableBody from "../Components/TableBody";
 import SearchContent from "../Components/SearchContent";
 import Axios from "axios";
 import {Col, Row} from 'reactstrap';
+import Finnhub from "../api/finnhub";
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -22,19 +23,10 @@ const [result, setResult] = useState([]);
 
 const getQuote = (e) =>{
   e.preventDefault();
-  try{
-     Axios.get(
-      `/users/quote/${search}`
-    ).then((res) => {
-  setResult(res.data);
-   console.log(res.data);
-    });
-  }
-  catch (err) {
-    err.response.data.msg && setError(err.response.data.msg);
-  }
-  }
-
+  Finnhub.getData(search).then((res) => {
+    console.log(res);
+  });
+}
     
   useEffect(() => {
     if (!userData.user) history.push("/login");
