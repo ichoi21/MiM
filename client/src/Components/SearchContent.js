@@ -58,7 +58,7 @@ const SearchContent = ({ticker, open, vol, marketCap,fwh, fwl, pefwd,eps, turnov
                 <td>{ffmc}</td>
             </tr>
             <tr>
-                <td>{"Lost Size: "}</td>
+                <td>{"Lot Size: "}</td>
                 <td>{lotSize}</td>
             </tr>
         </tbody>

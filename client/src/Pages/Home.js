@@ -26,7 +26,8 @@ const getQuote = (e) =>{
      Axios.get(
       `/users/quote/${search}`
     ).then((res) => {
-   setResult(res.data);
+  setResult(res.data);
+   console.log(res.data);
     });
   }
   catch (err) {
@@ -52,9 +53,43 @@ const getQuote = (e) =>{
     })}
   </Row>
   <SearchBar onChange={ (e)=>setSearch(e.target.value)} onClick={getQuote}/>
-  <Card>
-    <SearchContent ticker={"AAPL"} name={"Apple"}/>
+  {Object.keys(result).map((item)=>{
+    return (
+<Card>
+    <SearchContent 
+    ticker={result.financial.symbol}
+    name={result.profile.name}
+    open={result.quote.o}
+    high={result.quote.h}
+    // vol={}
+    threeMonth={result.financial.metric["3MonthAverageTradingVolume"]}
+    fwh={result.financial.metric["52WeekHigh"]}
+    marketCap={result.financial.metric.marketCapitalization}
+    // pefwd={}
+    eps={result.financial.metric.epsBasicExclExtraItemsAnnual}
+    // pturnover={}
+    // sharesOut={}
+    // ffmc={}
+    // lotSize={}
+    last={result.quote.pc}
+    low={result.quote.l}
+    turnover={result.financial.metric.inventoryTurnoverTTM}
+    // range={}
+    fwl={result.financial.metric["52WeekLow"]}
+    // pettm={}
+    dividend={result.financial.metric.dividendsPerShareTTM}
+    divYield={result.financial.metric.dividendYieldIndicatedAnnual}
+    pb={result.financial.metric.payoutRatioTTM}
+    // freeFloat={}
+    beta={result.financial.metric.beta}
+    // edd={}
+
+
+     />
   </Card>
+    )
+  })}
+  
   <TableList>
   {(sampleWatch.map((item, index) => {
       return (
