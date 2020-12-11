@@ -8,6 +8,7 @@ import TableBody from "../Components/TableBody";
 import SearchContent from "../Components/SearchContent";
 import Axios from "axios";
 import {Col, Row} from 'reactstrap';
+
 import Finnhub from "../api/finnhub";
 
 const Home = () => {
@@ -81,7 +82,8 @@ const getQuote = (e) =>{
   </Card>
     )
   })}
-  
+
+
   <TableList>
   {(sampleWatch.map((item, index) => {
       return (
