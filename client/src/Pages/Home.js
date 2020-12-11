@@ -26,6 +26,7 @@ const getQuote = (e) =>{
   e.preventDefault();
   Finnhub.getData(search).then((res) => {
     console.log(res);
+    setResult(res.data);
   });
 }
     
@@ -76,8 +77,6 @@ const getQuote = (e) =>{
     // freeFloat={}
     beta={result.financial.metric.beta}
     // edd={}
-
-
      />
   </Card>
     )
