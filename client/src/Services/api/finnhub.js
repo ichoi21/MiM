@@ -1,1 +1,0 @@
-const { FINNHUB_TOKEN } = process.env;
