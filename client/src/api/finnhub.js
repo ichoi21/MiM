@@ -5,5 +5,6 @@ export default {
     axios({
         'method':'GET',
         url: `/users/quote/${props}`,
+        params: props,
     })
 }
