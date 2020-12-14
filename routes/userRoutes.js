@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/userModel");
+const Quote = require("../models/quoteModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const auth = require("../middleware/auth");
@@ -123,11 +124,11 @@ router.post("/addWatchlist", auth, async (req, res) => {
       return res.status(400).json({ msg: "Not all fields have been entered." });
 
     const watchList = new Quote({
-      ticker,
-      name,
-      last,
-      high,
-      low,
+      ticker: ticker,
+      name: name,
+      last: last,
+      high: high,
+      low: low,
     });
     const user = await User.findById(req.user);
     user.watchList.push(watchList);
@@ -137,6 +138,7 @@ router.post("/addWatchlist", auth, async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 router.get("/renderWatchlist", auth, async (req, res) => {
   const user = await User.findById(req.user);
