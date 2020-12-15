@@ -9,7 +9,7 @@ const TableList = (props) => {
         <Table dark>
             <thead>
             <tr>
-                <th>#</th>
+                <th></th>
                 <th>TICKER</th>
                 <th>NAME</th>
                 <th>LAST</th>
