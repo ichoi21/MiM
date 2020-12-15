@@ -18,7 +18,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import Box from '@material-ui/core/Box';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 
 //left column image url and styling from material ui 
@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage: 'url(https://source.unsplash.com/featured/?stocks)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+      theme.palette.type === 'dark' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
@@ -104,10 +104,11 @@ const Login = () => {
     if (userData.user) history.push("/");
   }, [userData.user, history]);
 
+  const classes = useStyles(); 
   return (
-    <Grid container component="main">
+    <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} />
+      <Grid item xs={false} sm={4} md={7} className={classes.image}/>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div>
             <Typography component="h1" variant="h5">

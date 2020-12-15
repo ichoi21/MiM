@@ -50,6 +50,19 @@ const getQuote = (e) =>{
   {Object.keys(result).map((item)=>{
     return (
 <Card>
+    <p onClick={async () => {
+                let saveTicker = {
+                  ticker:result.financial.symbol,
+                  name:result.profile.name,
+                  last:result.quote.pc,
+                  high:result.quote.h,
+                  low:result.quote.l,
+                };
+                await Axios.post("/users/addWatchlist", saveTicker, {
+                  headers: { "x-auth-token": localStorage.getItem("auth-token") },
+                });
+                console.log("Added to watchlist");
+              }}>Add to Watchlist</p>
     <SearchContent 
     ticker={result.financial.symbol}
     name={result.profile.name}
