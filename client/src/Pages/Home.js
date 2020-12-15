@@ -15,12 +15,12 @@ const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
   const indices = ["S&P 500", "NASDAQ", "DIJA", "RUSSELL", "VIX"];
-  const sampleWatch = ["TSLA", "AAPL", "FCEL"];
 
 const [search, setSearch] = useState("");
 // const [quote, setQuote] = useState([]);
 const [error, setError] = useState();
 const [result, setResult] = useState([]);
+const [watchlist, setWatchlist] = useState([]);
 
 const getQuote = (e) =>{
   e.preventDefault();
@@ -29,9 +29,20 @@ const getQuote = (e) =>{
     setResult(res.data);
   });
 }
+
+const renderWatchlist = async () => {
+  await Axios.get("/users/renderWatchlist", {
+    headers: { "x-auth-token": localStorage.getItem("auth-token") },
+  }).then((res) => {
+    setWatchlist(res.data);
+    console.log(res.data);
+  });
+};
     
   useEffect(() => {
     if (!userData.user) history.push("/login");
+    renderWatchlist();
+    console.log(typeof result);
   }, [userData.user, history]);
 
   return (
@@ -62,6 +73,7 @@ const getQuote = (e) =>{
                   headers: { "x-auth-token": localStorage.getItem("auth-token") },
                 });
                 console.log("Added to watchlist");
+                renderWatchlist();
               }}>Add to Watchlist</p>
     <SearchContent 
     ticker={result.financial.symbol}
@@ -97,12 +109,26 @@ const getQuote = (e) =>{
 
 
   <TableList>
-  {(sampleWatch.map((item, index) => {
+  {watchlist.map((item) => {
       return (
-<TableBody key={index} ticker={item} name={item} />
+<TableBody ticker={item.ticker} name={item.name} last={item.last} high={item.high} low={item.low} 
+                        onClick={async () => {
+                          await Axios.delete(
+                            `users/deleteWatchList/${item._id}`,
+                            {
+                              headers: {
+                                "x-auth-token": localStorage.getItem(
+                                  "auth-token"
+                                ),
+                              },
+                            }
+                          );
+                          renderWatchlist();
+                        }}
+/>
       
       )
-    }))}
+    })}
   </TableList>
   </>
     );
