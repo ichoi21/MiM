@@ -58,7 +58,9 @@ const renderWatchlist = async () => {
     })}
   </Row>
   <SearchBar onChange={ (e)=>setSearch(e.target.value)} onClick={getQuote}/>
-  {Object.keys(result).map((item)=>{
+  <Row>
+      <Col sm="6">
+      {Object.keys(result).map((item)=>{
     return (
 <Card>
     <p onClick={async () => {
@@ -106,9 +108,9 @@ const renderWatchlist = async () => {
   </Card>
     )
   })}
-
-
-  <TableList>
+      </Col>
+      <Col sm="6">
+      <TableList>
   {watchlist.map((item) => {
       return (
 <TableBody ticker={item.ticker} name={item.name} last={item.last} high={item.high} low={item.low} 
@@ -130,6 +132,9 @@ const renderWatchlist = async () => {
       )
     })}
   </TableList>
+      </Col>
+  </Row>
+  
   </>
     );
 };
