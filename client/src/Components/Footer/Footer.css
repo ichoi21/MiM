@@ -1,0 +1,39 @@
+.footerColor {
+  background-color: #343a38;
+}
+
+.text-color,
+.text-color a {
+  color: white;
+}
+
+.footer-pos,
+.copyright {
+  padding: 2em 2em 1em 2em;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.footer-pos2 {
+  padding: 2em 2em 1em 2em;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+#FooterLinks,
+.text-link,
+Link {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  text-decoration: none;
+}
+
+@media (min-width: 600px) {
+  .MuiGrid-grid-sm-4 {
+    background-color: #343a38;
+  }
+}

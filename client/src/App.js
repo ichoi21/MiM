@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+
+import UserContext from "./Context/UserContext";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
-import UserContext from "./Context/UserContext";
+import Footer from "./Components/Footer";
+import Header from "./Components/Header";
 // import SignIn from "./Components/SignIn";
 
 function App() {
@@ -56,13 +59,12 @@ function App() {
       <div>
       {!userData.user ? (
           <>
-            <Link to="/signup">Signup</Link>
-            <Link to="/login">Login</Link>
+          Welcome to DMiM Stocks
+          <Link to="/signup">Signup</Link>
+          <Link to="/login">Login</Link>
           </>
         ) : (
-          <Link to="/login" onClick={logout}>
-            Logout
-          </Link>
+          <Header/>
         )}
       </div>
 
@@ -74,6 +76,7 @@ function App() {
             <Route path="/" component={Home} />
           </Switch>
         </UserContext.Provider>
+        <Footer/>
       </BrowserRouter>
     </div>
   );
