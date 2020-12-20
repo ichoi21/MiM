@@ -6,6 +6,7 @@ import Card from "../Components/Card";
 import TableList from "../Components/TableList";
 import TableBody from "../Components/TableBody";
 import SearchContent from "../Components/SearchContent";
+import Footer from "../Components/Footer"
 import Axios from "axios";
 import {Col, Row} from 'reactstrap';
 
@@ -134,7 +135,7 @@ const renderWatchlist = async () => {
   </TableList>
       </Col>
   </Row>
-  
+  <Footer/>
   </>
     );
 };

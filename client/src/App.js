@@ -76,7 +76,7 @@ function App() {
             <Route path="/" component={Home} />
           </Switch>
         </UserContext.Provider>
-        <Footer/>
+        {/* <Footer/> */}
       </BrowserRouter>
     </div>
   );
