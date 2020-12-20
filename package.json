@@ -1,5 +1,5 @@
 {
-  "name": "MiM",
+  "name": "dMiM",
   "version": "1.0.0",
   "description": "Money Making Dashboard",
   "main": "server.js",
@@ -14,7 +14,7 @@
     "build": "cd client/ && npm install && npm run build"
   },
   "keywords": [],
-  "author": "Michelle, Myhkas, Ian",
+  "author": "Michelle, Myhkas, Ian, Danielle",
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
