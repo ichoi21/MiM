@@ -41,11 +41,7 @@ router.post("/addWatchlist", auth, async (req, res) => {
       return res.status(400).json({ msg: "Not all fields have been entered." });
 
     const watchList = new Quote({
-      ticker: ticker,
-      name: name,
-      last: last,
-      high: high,
-      low: low,
+      ticker, name, last, high, low,
     });
     const user = await User.findById(req.user);
     user.watchList.push(watchList);
@@ -66,7 +62,7 @@ router.get("/renderWatchlist", auth, async (req, res) => {
 router.delete("/deleteWatchList/:id", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user);
-    const indexToDelete = user.watchList.indexOf(req.body._id);
+    const indexToDelete = user.watchList.indexOf(req.body.userId);
 
     user.watchList.splice(indexToDelete, 1);
 
@@ -75,6 +71,15 @@ router.delete("/deleteWatchList/:id", auth, async (req, res) => {
     res.send(user.watchList);
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+router.delete("/removewl/:id", async (req, res) => {
+  try {
+    const deletedId = await Quote.findByIdAndDelete(req.params._id);
+    res.json(deletedId);
+  } catch (err) {
+    res.json({ error: err.message });
   }
 });
 

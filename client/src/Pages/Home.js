@@ -116,7 +116,7 @@ const renderWatchlist = async () => {
 <TableBody ticker={item.ticker} name={item.name} last={item.last} high={item.high} low={item.low} 
                         onClick={async () => {
                           await Axios.delete(
-                            `users/deleteWatchList/${item._id}`,
+                            `users/removewl/${item._id}`,
                             {
                               headers: {
                                 "x-auth-token": localStorage.getItem(
