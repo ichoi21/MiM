@@ -6,6 +6,7 @@ import Card from "../Components/Card";
 import TableList from "../Components/TableList";
 import TableBody from "../Components/TableBody";
 import SearchContent from "../Components/SearchContent";
+import Footer from "../Components/Footer"
 import Axios from "axios";
 import {Col, Row} from 'reactstrap';
 
@@ -30,17 +31,19 @@ const getQuote = (e) =>{
   });
 }
 
-const renderWatchlist =  () => {
-  Axios.get("/users/renderWatchlist", {
+const renderWatchlist = async () => {
+  await Axios.get("/users/renderWatchlist", {
     headers: { "x-auth-token": localStorage.getItem("auth-token") },
   }).then((res) => {
     setWatchlist(res.data);
+    console.log(res.data);
   });
 };
     
   useEffect(() => {
     if (!userData.user) history.push("/login");
-    renderWatchlist()
+    renderWatchlist();
+    console.log(typeof result);
   }, [userData.user, history]);
 
   return (
@@ -114,7 +117,7 @@ const renderWatchlist =  () => {
 <TableBody ticker={item.ticker} name={item.name} last={item.last} high={item.high} low={item.low} 
                         onClick={async () => {
                           await Axios.delete(
-                            `users/removewl/${item._id}`,
+                            `users/deleteWatchList/${item._id}`,
                             {
                               headers: {
                                 "x-auth-token": localStorage.getItem(
@@ -132,7 +135,7 @@ const renderWatchlist =  () => {
   </TableList>
       </Col>
   </Row>
-  
+  <Footer/>
   </>
     );
 };
