@@ -8,6 +8,9 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
+import Scanner from "./Pages/Scanner";
+import Callresults from "./Pages/Callresults";
+import Settings from "./Pages/Settings"
 // import SignIn from "./Components/SignIn";
 
 function App() {
@@ -40,15 +43,6 @@ function App() {
     }
   };
 
-  const logout = () => {
-    setUserData({
-      token: undefined,
-      user: undefined,
-    });
-
-    localStorage.setItem("auth-token", "");
-  };
-
   useEffect(() => {
     checkLoggedIn();
   }, []);
@@ -56,24 +50,15 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <div>
-      {!userData.user ? (
-          <>
-          Welcome to DMiM Stocks
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
-          </>
-        ) : (
-          <Header/>
-        )}
-      </div>
-
-
         <UserContext.Provider value={{ userData, setUserData }}>
+        <Header/>
           <Switch>
+           <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/" component={Home} />
+            <Route path="/scanner" component={Scanner} />
+            <Route path="/callresults" component={Callresults} />
+            <Route path="/settings" component={Settings} />
           </Switch>
         </UserContext.Provider>
         {/* <Footer/> */}

@@ -72,6 +72,7 @@ const renderWatchlist = async () => {
                   high:result.quote.h,
                   low:result.quote.l,
                 };
+                // adds ticker to watchlist
                 await Axios.post("/users/addWatchlist", saveTicker, {
                   headers: { "x-auth-token": localStorage.getItem("auth-token") },
                 });
@@ -116,8 +117,9 @@ const renderWatchlist = async () => {
       return (
 <TableBody ticker={item.ticker} name={item.name} last={item.last} high={item.high} low={item.low} 
                         onClick={async () => {
+                          //removes watchlist
                           await Axios.delete(
-                            `users/deleteWatchList/${item._id}`,
+                            `users/remove/${item._id}`,
                             {
                               headers: {
                                 "x-auth-token": localStorage.getItem(
