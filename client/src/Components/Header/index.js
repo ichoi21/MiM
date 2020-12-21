@@ -12,6 +12,7 @@ const Header = () => {
       <Link to="/login">Login</Link> */}
       <Link to="/login">Dashboard</Link>
       <Link to="/login">Scanner</Link>
+      <Link to="/login">News</Link>
       <Link to="/login">Daily Calls/Results</Link>
       <Link to="../../Pages/login" onClick={App.logout}>Logout</Link>
 
