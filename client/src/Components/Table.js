@@ -40,7 +40,7 @@ const TableComponent = props => {
 
     const classes = useStyles();
 
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
     const [page, setPage] = useState(0);
 
     const tableHeaders = [
