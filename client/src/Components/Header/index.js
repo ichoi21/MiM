@@ -10,6 +10,8 @@ import { useHistory } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
 import Axios from "axios";
 
+import "./Header.css";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -30,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   const scanner = () => history.push("/scanner");
   const callresults = () => history.push("/callresults");
   const home = () => history.push("/");
-  const settings = () => history.push("/settings");
+  const news = () => history.push("/news");
   const signup = () => history.push("/signup");
   const logout = () => {
     setUserData({
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className="headerColor">
           <Typography variant="h6" className={classes.title} onClick={home}>
             MiM
           </Typography>
@@ -53,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
             <>
             <Button color="inherit" onClick={scanner}>Scanner</Button>
             <Button color="inherit" onClick={callresults}>Daily Calls/Results</Button>
-            <Button color="inherit" onClick={settings}>Settings</Button>
+            <Button color="inherit" onClick={news}>Settings</Button>
             <Button color="inherit" onClick={logout}>Logout</Button>
 
             </>
