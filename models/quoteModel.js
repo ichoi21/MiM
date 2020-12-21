@@ -6,6 +6,7 @@ const quoteSchema = new mongoose.Schema({
   last: { type: Number },
   high: { type: Number},
   low: { type: Number },
+  userId: { type: String, required: true },
 });
 
-module.exports = Quote = mongoose.model("reminder", quoteSchema);
+module.exports = Quote = mongoose.model("quote", quoteSchema);
