@@ -8,4 +8,4 @@ const quoteSchema = new mongoose.Schema({
   low: { type: Number },
 });
 
-module.exports = Quote = mongoose.model("reminder", quoteSchema);
+module.exports = Quote = mongoose.model("quote", quoteSchema);

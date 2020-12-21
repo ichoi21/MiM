@@ -14,13 +14,13 @@ import Finnhub from "../api/finnhub";
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
-  const indices = ["S&P 500", "NASDAQ", "DIJA", "RUSSELL", "VIX"];
 
 const [search, setSearch] = useState("");
-// const [quote, setQuote] = useState([]);
 const [error, setError] = useState();
 const [result, setResult] = useState([]);
+const [quote, setQuote] = useState([]);
 const [watchlist, setWatchlist] = useState([]);
+
 
 const getQuote = (e) =>{
   e.preventDefault();
@@ -35,47 +35,38 @@ const renderWatchlist = async () => {
     headers: { "x-auth-token": localStorage.getItem("auth-token") },
   }).then((res) => {
     setWatchlist(res.data);
-    console.log(res.data);
   });
 };
+
+const renderWl = () => {
+  watchlist.map((item) => {
+     Finnhub.getData(item).then((res) => {
+       console.log(res);
+       setQuote(res.data);
+     })
+  })
+}
     
-  useEffect(() => {
+  useEffect( async() => {
     if (!userData.user) history.push("/login");
-    renderWatchlist();
-    console.log(typeof result);
   }, [userData.user, history]);
 
   return (
     <>
   <h1>dMiM $tock search</h1>
-  <Row>
-    {indices.map((item,index) => {
-      return (
-        <Col sm="2">
-        <Card text={item}/>
-        </Col>
-      )
-    })}
-  </Row>
   <SearchBar onChange={ (e)=>setSearch(e.target.value)} onClick={getQuote}/>
   <Row>
       <Col sm="6">
-      {Object.keys(result).map((item)=>{
+      {Object.keys(result).map((item,index)=>{
     return (
 <Card>
     <p onClick={async () => {
-                let saveTicker = {
-                  ticker:result.financial.symbol,
-                  name:result.profile.name,
-                  last:result.quote.pc,
-                  high:result.quote.h,
-                  low:result.quote.l,
-                };
+                let saveTicker = {ticker: result.financial.symbol};
                 await Axios.post("/users/addWatchlist", saveTicker, {
                   headers: { "x-auth-token": localStorage.getItem("auth-token") },
                 });
                 console.log("Added to watchlist");
-                renderWatchlist();
+                console.log(quote);
               }}>Add to Watchlist</p>
     <SearchContent 
     ticker={result.financial.symbol}
@@ -111,12 +102,12 @@ const renderWatchlist = async () => {
       </Col>
       <Col sm="6">
       <TableList>
-  {watchlist.map((item) => {
+  {quote.map((item) => {
       return (
-<TableBody ticker={item.ticker} name={item.name} last={item.last} high={item.high} low={item.low} 
+<TableBody ticker={item.financial.symbol}  
                         onClick={async () => {
                           await Axios.delete(
-                            `users/removewl/${item._id}`,
+                            `users/deleteWatchList/${item._id}`,
                             {
                               headers: {
                                 "x-auth-token": localStorage.getItem(
@@ -125,7 +116,7 @@ const renderWatchlist = async () => {
                               },
                             }
                           );
-                          renderWatchlist();
+                          // renderWatchlist();
                         }}
 />
       

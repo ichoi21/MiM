@@ -34,19 +34,17 @@ router.get("/quote/:symbol", async (req,res) => {
 
 router.post("/addWatchlist", auth, async (req, res) => {
   try {
-    const { ticker,name,last,high,low } = req.body;
+    const { ticker } = req.body;
 
     //validation
-    if (!ticker || !name || !last || !high || !low )
+    if (!ticker)
       return res.status(400).json({ msg: "Not all fields have been entered." });
 
-    const watchList = new Quote({
-      ticker, name, last, high, low,
-    });
+    const watchList = ticker;
     const user = await User.findById(req.user);
     user.watchList.push(watchList);
     await user.save();
-    res.json(user.reminders);
+    res.json(user.quote);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -62,10 +60,15 @@ router.get("/renderWatchlist", auth, async (req, res) => {
 router.delete("/deleteWatchList/:id", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user);
-    const indexToDelete = user.watchList.indexOf(req.body.userId);
-
+    // const indexToDelete = user.watchList.indexOf(req.body._id);
+    let indexToDelete;
+    for (let i = 0; i < user.watchList.length; i++) {
+        if(user.watchList._id == req.body._id) {
+          indexToDelete=i;
+        }
+    }
     user.watchList.splice(indexToDelete, 1);
-
+    console.log(indexToDelete);
     await user.save();
 
     res.send(user.watchList);
@@ -76,7 +79,7 @@ router.delete("/deleteWatchList/:id", auth, async (req, res) => {
 
 router.delete("/removewl/:id", async (req, res) => {
   try {
-    const deletedId = await Quote.findByIdAndDelete(req.params._id);
+    const deletedId = await Quote.findByIdAndDelete(req.body._id);
     res.json(deletedId);
   } catch (err) {
     res.json({ error: err.message });
