@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Link, makeStyles, Typography } from "@material-ui/core";
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import App from "../../App"
 
 const Header = () => {
