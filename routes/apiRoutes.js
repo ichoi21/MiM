@@ -80,5 +80,12 @@ router.delete("/remove/:id", auth, async (req, res) => {
   res.json(deletedQuote);
 });
 
+router.patch("/edit/:id", auth, async (req, res) => {
+  const quote = await Quote.findOne({ userId: req.user, _id: req.params.id });
+
+  if (!quote) return res.status(400).json({ msg: "No quote to update." });
+  const updateQuote = await Quote.findByIdAndUpdate(req.params.id, req.body);
+  res.json(updateQuote);
+});
 
 module.exports = router;
