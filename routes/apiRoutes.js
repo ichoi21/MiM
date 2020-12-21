@@ -41,22 +41,18 @@ router.post("/addWatchlist", auth, async (req, res) => {
       return res.status(400).json({ msg: "Not all fields have been entered." });
 
     const watchList = new Quote({
-      ticker, name, last, high, low,
+      ticker, name, last, high, low,userId: req.user,
     });
-    const user = await User.findById(req.user);
-    user.watchList.push(watchList);
-    await user.save();
-    res.json(user.quote);
+    const savedQuote = await watchList.save();
+    res.json(savedQuote);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
 router.get("/renderWatchlist", auth, async (req, res) => {
-  const user = await User.findById(req.user);
-  res.json(
-    user.watchList
-  );
+  const quote = await Quote.find({ userId: req.user });
+  res.json(quote);
 });
 
 router.delete("/deleteWatchList/:id", auth, async (req, res) => {
@@ -74,13 +70,14 @@ router.delete("/deleteWatchList/:id", auth, async (req, res) => {
   }
 });
 
-router.delete("/removewl/:id", async (req, res) => {
-  try {
-    const deletedId = await Quote.findByIdAndDelete(req.params._id);
-    res.json(deletedId);
-  } catch (err) {
-    res.json({ error: err.message });
-  }
+router.delete("/remove/:id", auth, async (req, res) => {
+  const quote = await Quote.findOne({ userId: req.user, _id: req.params.id });
+  if (!quote)
+    return res
+      .status(400)
+      .json({ msg: "No quote found with this current user." });
+  const deletedQuote = await Quote.findByIdAndDelete(req.params.id);
+  res.json(deletedQuote);
 });
 
 
