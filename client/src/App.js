@@ -8,14 +8,11 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
-<<<<<<< HEAD
 import Profile from "./Pages/Profile"; 
-
-=======
 import Scanner from "./Pages/Scanner";
 import Callresults from "./Pages/Callresults";
 import Settings from "./Pages/Settings"
->>>>>>> 7c6c717d9cb373b4a2715930b9b0cf6da1f7b0c7
+
 // import SignIn from "./Components/SignIn";
 
 function App() {
