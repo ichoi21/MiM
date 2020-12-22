@@ -49,9 +49,9 @@ const Footer = () => {
               <Link color="inherit" href="/Contact">
                 Education
               </Link>{" "}
-              <Link color="inherit" href="/Settings">
+              <Link color="inherit" href="/Profile.js">
                 Settings
-              </Link>{" "}
+              </Link>{""}
               <Link color="inherit" href="/About">
                 About Us
               </Link>{" "}
