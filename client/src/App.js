@@ -8,8 +8,14 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
+<<<<<<< HEAD
 import Profile from "./Pages/Profile"; 
 
+=======
+import Scanner from "./Pages/Scanner";
+import Callresults from "./Pages/Callresults";
+import Settings from "./Pages/Settings"
+>>>>>>> 7c6c717d9cb373b4a2715930b9b0cf6da1f7b0c7
 // import SignIn from "./Components/SignIn";
 
 function App() {
@@ -42,15 +48,6 @@ function App() {
     }
   };
 
-  const logout = () => {
-    setUserData({
-      token: undefined,
-      user: undefined,
-    });
-
-    localStorage.setItem("auth-token", "");
-  };
-
   useEffect(() => {
     checkLoggedIn();
   }, []);
@@ -58,21 +55,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <div>
-      {!userData.user ? (
-          <>
-          Welcome to DMiM Stocks
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
-          </>
-        ) : (
-          <Header/>
-        )}
-      </div>
-
-
         <UserContext.Provider value={{ userData, setUserData }}>
+        <Header/>
           <Switch>
+           <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/" component={Home} />
