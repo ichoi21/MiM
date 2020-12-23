@@ -53,7 +53,14 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
-        <Header/>
+          {userData.user ? (
+            <>
+            <Header/>
+            </>
+          ) : (
+              <></>
+          )}
+
           <Switch>
            <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />

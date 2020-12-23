@@ -74,6 +74,8 @@ const Login = () => {
   const [form, setForm] = useState({});
   const history = useHistory();
 
+  const signup = () => history.push("/signup");
+
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -144,8 +146,8 @@ const Login = () => {
                </Link>
              </Grid>
              <Grid item>
-               <Link href="#" variant="body2">
-                 {"Don't have an account? Sign Up"}
+               <Link variant="body2" onClick={signup}>
+                 Don't have an account? Sign Up
                </Link>
              </Grid>
            </Grid>

@@ -7,10 +7,10 @@ const auth = require("../middleware/auth");
 // register an account
 router.post("/register", async (req, res) => {
   try {
-    const { email, password, passwordCheck, displayName } = req.body;
+    const { firstName, lastName, email, password, passwordCheck } = req.body;
 
     // validation (need one conditional for email validation)
-    if (!email || !password || !passwordCheck || !displayName)
+    if (!firstName || !lastName || !email || !password || !passwordCheck)
       return res.status(400).json({ msg: "Not all fields have been entered!" });
 
     if (password.length < 8)
@@ -32,9 +32,10 @@ router.post("/register", async (req, res) => {
     const passwordHash = await bcrypt.hash(password, salt);
 
     const newUser = new User({
+      firstName,
+      lastName,
       email,
       password: passwordHash,
-      displayName,
     });
 
     const savedUser = await newUser.save();
@@ -72,7 +73,8 @@ router.post("/login", async (req, res) => {
       token,
       user: {
         id: user._id,
-        displayName: user.displayName,
+        firstName: user.firstName,
+        lastName: user.lastName
       },
     });
   } catch (err) {
