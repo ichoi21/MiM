@@ -8,9 +8,11 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
+import Profile from "./Pages/Profile"; 
 import Scanner from "./Pages/Scanner";
 import Callresults from "./Pages/Callresults";
 import Settings from "./Pages/Settings"
+
 // import SignIn from "./Components/SignIn";
 
 function App() {
@@ -56,9 +58,8 @@ function App() {
            <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/scanner" component={Scanner} />
-            <Route path="/callresults" component={Callresults} />
-            <Route path="/settings" component={Settings} />
+            <Route path="/" component={Home} />
+         
           </Switch>
         </UserContext.Provider>
         {/* <Footer/> */}

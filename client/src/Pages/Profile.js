@@ -6,7 +6,7 @@ import UserContext from "../Context/UserContext";
 const Profile = () => {
     return (
         <div>
-            
+            <h1> Hello from Profile</h1>
         </div>
     )
 }
