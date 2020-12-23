@@ -54,18 +54,28 @@ const Signup = () => {
   const { userData, setUserData } = useContext(UserContext);
   const [form, setForm] = useState();
   const history = useHistory();
+  const [newUser, setNewUser] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
+  
+  const login = () => history.push("/login");
 
-  const onChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const createNewUser = (e) => {
+    setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
   const submit = async (e) => {
     e.preventDefault();
     try {
-      await Axios.post("/users/register", form);
+      
+      await Axios.post("/users/register", newUser);
       const loginRes = await Axios.post("/users/login", {
-        email: form.email,
-        password: form.password,
+        email: newUser.email,
+        password: newUser.password,
       });
 
       setUserData({
@@ -74,7 +84,7 @@ const Signup = () => {
       });
 
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/home");
+      history.push("/");
     } catch (err) {
       console.log("problem", err);
     }
@@ -93,10 +103,11 @@ const Signup = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form className={classes.form} noValidate>
+          <form onSubmit={submit} className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={createNewUser}
                   autoComplete="fname"
                   name="firstName"
                   variant="outlined"
@@ -109,6 +120,7 @@ const Signup = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                onChange={createNewUser}
                   variant="outlined"
                   required
                   fullWidth
@@ -120,6 +132,7 @@ const Signup = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                onChange={createNewUser}
                   variant="outlined"
                   required
                   fullWidth
@@ -131,6 +144,7 @@ const Signup = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                onChange={createNewUser}
                   variant="outlined"
                   required
                   fullWidth
@@ -138,6 +152,19 @@ const Signup = () => {
                   label="Password"
                   type="password"
                   id="password"
+                  autoComplete="current-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                onChange={createNewUser}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="passwordCheck"
+                  label="Verify Password"
+                  type="password"
+                  id="passwordCheck"
                   autoComplete="current-password"
                 />
               </Grid>
@@ -159,7 +186,7 @@ const Signup = () => {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link variant="body2" onClick={login}>
                   Already have an account? Sign in
                 </Link>
               </Grid>
