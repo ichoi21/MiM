@@ -54,6 +54,8 @@ const Signup = () => {
   const { userData, setUserData } = useContext(UserContext);
   const [form, setForm] = useState();
   const history = useHistory();
+  
+  const login = () => history.push("/login");
 
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -142,6 +144,18 @@ const Signup = () => {
                 />
               </Grid>
               <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="verifyPassword"
+                  label="Verify Password"
+                  type="verifyPassword"
+                  id="verifyPassword"
+                  autoComplete="current-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
@@ -159,7 +173,7 @@ const Signup = () => {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link variant="body2" onClick={login}>
                   Already have an account? Sign in
                 </Link>
               </Grid>
