@@ -1,25 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
-import UserContext from "../Context/UserContext";
-import { useHistory } from "react-router-dom";
-import Axios from "axios";
-
-
-import {
-  makeStyles,
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  Paper,
-  Grid,
-  Typography,
-} from "@material-ui/core";
+import { Avatar, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Link, makeStyles, Paper, spacing, TextField, Typography } from "@material-ui/core";
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
+import UserContext from "../Context/UserContext";
 
 //left column image url and styling from material ui 
 
@@ -108,11 +94,11 @@ const Login = () => {
 
   const classes = useStyles(); 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container component="main" className={classes.root} spacing={2}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image}/>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <div>
+          <div style={{ padding: 20 }}>
             <Typography component="h1" variant="h5">
             Sign in
             </Typography>
@@ -136,20 +122,22 @@ const Login = () => {
               <FormControlLabel control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
               />
+              <Grid mr={50}>
               <Button type="submit" fullWidth variant="contained" color="info">
                 Sign In
               </Button>
           <Grid container>
-             <Grid item xs>
-               <Link href="#" variant="body2">
-                 Forgot password?
-               </Link>
-             </Grid>
-             <Grid item>
-               <Link variant="body2" onClick={signup}>
-                 Don't have an account? Sign Up
-               </Link>
-             </Grid>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link variant="body2" onClick={signup}>
+                Don't have an account? Sign Up
+              </Link>
+            </Grid>
+           </Grid>
            </Grid>
            <Box mt={5}>
            <Copyright />
