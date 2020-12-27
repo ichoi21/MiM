@@ -24,6 +24,7 @@ const [watchlist, setWatchlist] = useState([]);
 const [rowInfo, setRowInfo] = useState([]);
 let rows = [];
 
+// grabs info about searched ticker ISSUE: pulls 5 cards
 const getQuote = (e) =>{
   e.preventDefault();
   Finnhub.getData(search).then((res) => {
@@ -32,6 +33,35 @@ const getQuote = (e) =>{
   });
 }
 
+
+// Auto update watchlist under construction
+const updateQuote = () => {
+for (let i = 0; i < rows.length; i++) {
+  Finnhub.getData(rows[i].symbol.then((res) =>{
+   let updatedQuote = {
+      ticker: res.data.financial.symbol,
+      name: res.data.profile.name,
+      last: res.data.quote.pc,
+      high: res.data.quote.h,
+      low: res.data.quote.l,
+    }
+    // await Axios.patch(
+    //   `/users/edit/${res.data._id}`,
+    //   updatedQuote,
+    //   {
+    //     headers: {
+    //       "x-auth-token": localStorage.getItem(
+    //         "auth-token"
+    //       ),
+    //     },
+    //   }
+    // );
+    // renderWatchlist();
+  }))
+}
+}
+
+//renders watchlist
 const renderWatchlist = async () => {
   await Axios.get("/users/renderWatchlist", {
     headers: { "x-auth-token": localStorage.getItem("auth-token") },
@@ -39,6 +69,7 @@ const renderWatchlist = async () => {
     setWatchlist(res.data);
     for (let i = 0; i < res.data.length; i++) {
       let item ={
+          id: res.data[i]._id,
           symbol: res.data[i].ticker,
           name: res.data[i].name,
           last: res.data[i].last,
@@ -52,11 +83,10 @@ const renderWatchlist = async () => {
   });
 };
 
-    
   useEffect(() => {
     if (!userData.user) history.push("/login");
     renderWatchlist();
-    console.log(rows);
+    updateQuote();
   }, [userData.user, history]);
 
   return (

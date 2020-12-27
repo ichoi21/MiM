@@ -32,6 +32,11 @@ router.get("/quote/:symbol", async (req,res) => {
     
 })
 
+router.get("/find/:id", auth, async (req, res) => {
+  const quote = await Quote.findOne({ userId: req.user, _id: req.params.id });
+  res.json(quote.ticker);
+});
+
 router.post("/addWatchlist", auth, async (req, res) => {
   try {
     const { ticker,name,last,high,low } = req.body;
