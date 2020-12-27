@@ -2,16 +2,15 @@ import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 
+import Header from "./Components/Header";
 import UserContext from "./Context/UserContext";
+import Callresults from "./Pages/Callresults";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
-import Signup from "./Pages/Signup";
-import Footer from "./Components/Footer";
-import Header from "./Components/Header";
-import Profile from "./Pages/Profile"; 
-import Scanner from "./Pages/Scanner";
-import Callresults from "./Pages/Callresults";
 import News from "./Pages/News"
+import Scanner from "./Pages/Scanner";
+import Settings from "./Pages/Settings"
+import Signup from "./Pages/Signup";
 
 // import SignIn from "./Components/SignIn";
 
@@ -67,11 +66,11 @@ function App() {
             <Route path="/signup" component={Signup} />
             <Route path="/scanner" component={Scanner} />
             <Route path="/news" component={News} />
+            <Route path="/Settings" component={Settings} />
             <Route path="/callresults" component={Callresults} />
          
           </Switch>
         </UserContext.Provider>
-        {/* <Footer/> */}
       </BrowserRouter>
     </div>
   );

@@ -1,6 +1,6 @@
-import React from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
-
+import React from 'react';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const Table = (props) => {
 
@@ -51,7 +51,7 @@ let rows = props.rows;
   };
 
 
-  return <MDBDataTableV5 hover paging={false} data={data} />;
+  return <MDBDataTableV5 striped sortable hover paging={false} data={data} />;
 }
 
 export default Table;
