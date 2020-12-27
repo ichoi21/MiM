@@ -2,16 +2,14 @@ import { Grid, Link, makeStyles, spacing, Typography } from "@material-ui/core";
 import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Col, Row } from 'reactstrap';
-
+import UserContext from "../Context/UserContext";
+import SearchBar from "../Components/SearchBar";
+import Table from "../Components/Table/index";
+import SearchContent from "../Components/SearchContent";
+import Footer from "../Components/Footer"
+import {Col, Row} from 'reactstrap';
 import Finnhub from "../api/finnhub";
 import Card from "../Components/Card";
-import Footer from "../Components/Footer"
-import SearchBar from "../Components/SearchBar";
-import SearchContent from "../Components/SearchContent";
-import TableBody from "../Components/TableBody";
-import TableList from "../Components/TableList";
-import UserContext from "../Context/UserContext";
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -23,6 +21,8 @@ const [search, setSearch] = useState("");
 const [error, setError] = useState();
 const [result, setResult] = useState([]);
 const [watchlist, setWatchlist] = useState([]);
+const [rowInfo, setRowInfo] = useState([]);
+let rows = [];
 
 const getQuote = (e) =>{
   e.preventDefault();
@@ -37,14 +37,26 @@ const renderWatchlist = async () => {
     headers: { "x-auth-token": localStorage.getItem("auth-token") },
   }).then((res) => {
     setWatchlist(res.data);
-    console.log(res.data);
+    for (let i = 0; i < res.data.length; i++) {
+      let item ={
+          symbol: res.data[i].ticker,
+          name: res.data[i].name,
+          last: res.data[i].last,
+          high: res.data[i].high,
+          low: res.data[i].low,
+          vol: "n/a"
+      }
+      rows.push(item)
+    }
+    setRowInfo(rows);
   });
 };
+
     
   useEffect(() => {
     if (!userData.user) history.push("/login");
     renderWatchlist();
-    console.log(typeof result);
+    console.log(rows);
   }, [userData.user, history]);
 
   return (
@@ -117,25 +129,7 @@ const renderWatchlist = async () => {
         })}
       </Grid>
       <Grid sm="6">
-        <TableList>
-          {watchlist.map((item) => {
-            return (
-              <TableBody ticker={item.ticker} name={item.name} last={item.last} high={item.high} low={item.low} 
-                onClick={async () => {
-              //removes watchlist
-                await Axios.delete(
-                  `users/remove/${item._id}`,
-                  {headers: {
-                    "x-auth-token": localStorage.getItem(
-                    "auth-token"),
-                    },
-                  }
-                );
-                renderWatchlist();
-              }}/>
-            )
-          })}
-        </TableList>
+      <Table rows={rowInfo}/>
       </Grid>
       <Footer/>
     </Grid>

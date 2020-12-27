@@ -11,7 +11,7 @@ import Header from "./Components/Header";
 import Profile from "./Pages/Profile"; 
 import Scanner from "./Pages/Scanner";
 import Callresults from "./Pages/Callresults";
-import Settings from "./Pages/Settings"
+import News from "./Pages/News"
 
 // import SignIn from "./Components/SignIn";
 
@@ -65,7 +65,9 @@ function App() {
            <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/" component={Home} />
+            <Route path="/scanner" component={Scanner} />
+            <Route path="/news" component={News} />
+            <Route path="/callresults" component={Callresults} />
          
           </Switch>
         </UserContext.Provider>
