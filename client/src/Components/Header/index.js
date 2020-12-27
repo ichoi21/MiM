@@ -1,14 +1,15 @@
-import React,{ useContext, useEffect, useState } from "react";
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import { makeStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
-import { useHistory } from "react-router-dom";
-import UserContext from "../../Context/UserContext";
 import Axios from "axios";
+import React,{ useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+
+import UserContext from "../../Context/UserContext";
 
 import "./Header.css";
 
@@ -49,13 +50,13 @@ const useStyles = makeStyles((theme) => ({
       <AppBar position="static">
         <Toolbar className="headerColor">
           <Typography variant="h6" className={classes.title} onClick={home}>
-            MiM
+            dMiM $tock Watch
           </Typography>
           {userData.user ? (
             <>
             <Button color="inherit" onClick={scanner}>Scanner</Button>
+            <Button color="inherit" onClick={news}>News</Button>
             <Button color="inherit" onClick={callresults}>Daily Calls/Results</Button>
-            <Button color="inherit" onClick={news}>Settings</Button>
             <Button color="inherit" onClick={logout}>Logout</Button>
 
             </>
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
             <>
             <Button color="inherit" onClick={logout}>Login</Button> 
             <Button color="inherit" onClick={signup}>Sign Up</Button> 
-            </>
+    /        </>
           )}
          
         </Toolbar>
