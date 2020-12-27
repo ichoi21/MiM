@@ -1,10 +1,9 @@
 import React from 'react'
-import Table from "../Components/Table";
 
 function Scanner() {
     return (
         <div>
-            <Table/>
+            <h1>Scanner</h1>
         </div>
     )
 }

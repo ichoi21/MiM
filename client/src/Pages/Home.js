@@ -5,6 +5,7 @@ import SearchBar from "../Components/SearchBar";
 import Card from "../Components/Card";
 import TableList from "../Components/TableList";
 import TableBody from "../Components/TableBody";
+import Table from "../Components/Table/index";
 import SearchContent from "../Components/SearchContent";
 import Footer from "../Components/Footer"
 import Axios from "axios";
@@ -22,6 +23,8 @@ const [search, setSearch] = useState("");
 const [error, setError] = useState();
 const [result, setResult] = useState([]);
 const [watchlist, setWatchlist] = useState([]);
+const [rowInfo, setRowInfo] = useState([]);
+let rows = [];
 
 const getQuote = (e) =>{
   e.preventDefault();
@@ -36,14 +39,26 @@ const renderWatchlist = async () => {
     headers: { "x-auth-token": localStorage.getItem("auth-token") },
   }).then((res) => {
     setWatchlist(res.data);
-    console.log(res.data);
+    for (let i = 0; i < res.data.length; i++) {
+      let item ={
+          symbol: res.data[i].ticker,
+          name: res.data[i].name,
+          last: res.data[i].last,
+          high: res.data[i].high,
+          low: res.data[i].low,
+          vol: "n/a"
+      }
+      rows.push(item)
+    }
+    setRowInfo(rows);
   });
 };
+
     
   useEffect(() => {
     if (!userData.user) history.push("/login");
     renderWatchlist();
-    console.log(typeof result);
+    console.log(rows);
   }, [userData.user, history]);
 
   return (
@@ -112,7 +127,8 @@ const renderWatchlist = async () => {
   })}
       </Col>
       <Col sm="6">
-      <TableList>
+<Table rows={rowInfo}/>
+      {/* <TableList>
   {watchlist.map((item) => {
       return (
 <TableBody ticker={item.ticker} name={item.name} last={item.last} high={item.high} low={item.low} 
@@ -134,7 +150,7 @@ const renderWatchlist = async () => {
       
       )
     })}
-  </TableList>
+  </TableList> */}
       </Col>
   </Row>
   <Footer/>
