@@ -2,19 +2,20 @@ import { Grid, Link, makeStyles, spacing, Typography } from "@material-ui/core";
 import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import UserContext from "../Context/UserContext";
-import SearchBar from "../Components/SearchBar";
-import Table from "../Components/Table/index";
-import SearchContent from "../Components/SearchContent";
-import Footer from "../Components/Footer"
-import {Col, Row} from 'reactstrap';
+import { Col, Row } from 'reactstrap';
+
 import Finnhub from "../api/finnhub";
 import Card from "../Components/Card";
+import Footer from "../Components/Footer"
+import SearchBar from "../Components/SearchBar";
+import SearchContent from "../Components/SearchContent";
+import Table from "../Components/Table/index";
+import UserContext from "../Context/UserContext";
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
-  const indices = ["S&P 500", "NASDAQ", "DIJA", "RUSSELL", "VIX"];
+  const indices = ["S&P 500", "NASDAQ", "DIJA", "RUSSELL"];
 
 const [search, setSearch] = useState("");
 // const [quote, setQuote] = useState([]);
@@ -61,19 +62,19 @@ const renderWatchlist = async () => {
 
   return (
     <>
-    <Grid container spacing={2}>
+    <Grid container spacing={2} justify="center">
       {/* Major Indices Cards */}
-      <Grid container item sm={6} lg={6} spacing={2}>
+      <Grid container item sm={6} lg={6} spacing={1} justify="center" alignItems="center">
         {indices.map((item,index) => {
           return (
-            <Grid item sm={3}>
+            <Grid container item sm={3}>
               <Card text={item}/>
             </Grid>
           )
         })}
       </Grid>
       {/* Stocks Search */}
-      <Grid container item sm={10}>
+      <Grid container item sm={10} lg={6} justify="center">
         <SearchBar onChange={ (e)=>setSearch(e.target.value)} onClick={getQuote}/>
       </Grid>
         
