@@ -14,7 +14,7 @@ import Card from "../Components/Card";
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
-  const indices = ["S&P 500", "NASDAQ", "DIJA", "RUSSELL", "VIX"];
+  const indices = ["S&P 500", "NASDAQ", "DJIA", "RUSSELL"];
 
 const [search, setSearch] = useState("");
 // const [quote, setQuote] = useState([]);
@@ -104,19 +104,19 @@ const renderWatchlist = async () => {
 
   return (
     <>
-    <Grid container spacing={2}>
+    <Grid container spacing={2} justify="center" style={{ padding: 10 }}>
       {/* Major Indices Cards */}
-      <Grid container item sm={6} lg={6} spacing={2}>
+      <Grid container item sm={6} lg={10} spacing={2} alignItems="center">
         {indices.map((item,index) => {
           return (
-            <Grid item sm={3}>
-              <Card text={item} isShown={true}/>
+            <Grid container item sm={3}>
+              <Card text={item}isShown={true}/>
             </Grid>
           )
         })}
       </Grid>
       {/* Stocks Search */}
-      <Grid container item sm={10}>
+      <Grid container item sm={10} lg={8} justify="center">
         <SearchBar onChange={(e)=> setSearch(e.target.value)} onClick={getQuote}/>
       </Grid>
         
@@ -162,10 +162,9 @@ const renderWatchlist = async () => {
                 // // edd={}
                 />
             </Card>
-       
       </Grid>
-      <Grid sm="6">
-      <Table rows={rowInfo}/>
+      <Grid container item sm={6}>
+        <Table rows={rowInfo}/>
       </Grid>
       <Footer/>
     </Grid>

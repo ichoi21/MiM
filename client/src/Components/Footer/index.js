@@ -46,10 +46,10 @@ const Footer = () => {
               <p>
                 <b>MORE</b>
               </p>
-              <Link color="inherit" href="/Contact">
+              <Link color="inherit" href="/Education">
                 Education
               </Link>{" "}
-              <Link color="inherit" href="/Profile.js">
+              <Link color="inherit" href="/Profile">
                 Settings
               </Link>{""}
               <Link color="inherit" href="/About">
