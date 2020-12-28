@@ -33,6 +33,7 @@ const getQuote = (e) =>{
   });
 }
 
+// get symbol under construction
 const getTicker = (id) => {
  return Axios.get(`/users/find/${id}`, {
     headers: { "x-auth-token": localStorage.getItem("auth-token") },
@@ -92,7 +93,6 @@ const renderWatchlist = async () => {
     if (!userData.user) history.push("/login");
     renderWatchlist();
     updateQuote();
-    console.log(getTicker("5fe02946ef54851b9ae6d3cb"));
   }, [userData.user, history]);
 
   return (
