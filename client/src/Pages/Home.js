@@ -75,20 +75,20 @@ for (let i = 0; i < rows.length; i++) {
 const renderWatchlist = async () => {
   await Axios.get("/users/renderWatchlist", {
     headers: { "x-auth-token": localStorage.getItem("auth-token") },
-  }).then((res) => {
+  }).then(async (res) => {
     setWatchlist(res.data);
-    for (let i = 0; i < res.data.length; i++) {
+     for (let i = 0; i < res.data.length; i++) {
       placeHolder.push(res.data[i].ticker)
     }
-    for (let i = 0; i < placeHolder.length; i++) {
+     for (let i = 0; i < placeHolder.length; i++) {
       Finnhub.getData(placeHolder[i]).then((res) => {
-        let rez = res.data;
         let item = {
-          symbol: rez.symbol,
-          name: rez.companyName,
-          last: rez.latestPrice,
-          high: rez.high,
-          low:  rez.low,
+          symbol: res.data.symbol,
+          name: res.data.companyName,
+          last: res.data.latestPrice,
+          high: res.data.high,
+          low:  res.data.low,
+          vol: res.data.latestVolume,
         }
         rows.push(item)
       })
