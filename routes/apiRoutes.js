@@ -7,6 +7,21 @@ const User = require("../models/userModel");
 
 //load Profile
 
+// TEST IEX API
+
+router.get("/test/:symbol", async (req,res) => {
+  try {
+    let result = {};
+    const symbol = req.params.symbol;
+    await Axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.IEX_TOKEN}`)
+    .then((res) => result.quote = res.data)
+
+    res.send(result)
+  } catch(err){
+    res.status(500).json({ error: err.message });
+  }
+})
+
 //load FinHub
 
 router.get("/quote/:symbol", async (req,res) => {
