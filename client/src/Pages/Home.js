@@ -15,7 +15,7 @@ import UserContext from "../Context/UserContext";
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
-  const indices = ["S&P 500", "NASDAQ", "DIJA", "RUSSELL", "VIX"];
+  const indices = ["S&P 500", "NASDAQ", "DIJA", "RUSSELL"];
 
 const [search, setSearch] = useState("");
 // const [quote, setQuote] = useState([]);
@@ -74,7 +74,7 @@ const renderWatchlist = async () => {
         })}
       </Grid>
       {/* Stocks Search */}
-      <Grid container item sm={10} justify="center">
+      <Grid container item sm={10} lg={6} justify="center">
         <SearchBar onChange={ (e)=>setSearch(e.target.value)} onClick={getQuote}/>
       </Grid>
         
