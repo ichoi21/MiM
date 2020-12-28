@@ -23,6 +23,7 @@ const [result, setResult] = useState([]);
 const [watchlist, setWatchlist] = useState([]);
 const [rowInfo, setRowInfo] = useState([]);
 const [show, setShow] = useState(false);
+const placeHolder = [];
 let rows = [];
 
 
@@ -74,19 +75,23 @@ for (let i = 0; i < rows.length; i++) {
 const renderWatchlist = async () => {
   await Axios.get("/users/renderWatchlist", {
     headers: { "x-auth-token": localStorage.getItem("auth-token") },
-  }).then((res) => {
+  }).then(async (res) => {
     setWatchlist(res.data);
-    for (let i = 0; i < res.data.length; i++) {
-      let item ={
-          id: res.data[i]._id,
-          symbol: res.data[i].ticker,
-          name: res.data[i].name,
-          last: res.data[i].last,
-          high: res.data[i].high,
-          low: res.data[i].low,
-          vol: "n/a"
-      }
-      rows.push(item)
+     for (let i = 0; i < res.data.length; i++) {
+      placeHolder.push(res.data[i].ticker)
+    }
+     for (let i = 0; i < placeHolder.length; i++) {
+      await Finnhub.getData(placeHolder[i]).then((res) => {
+        let item = {
+          symbol: res.data.symbol,
+          name: res.data.companyName,
+          last: res.data.latestPrice,
+          high: res.data.high,
+          low:  res.data.low,
+          vol: res.data.latestVolume,
+        }
+        rows.push(item)
+      })
     }
     setRowInfo(rows);
   });
@@ -95,7 +100,6 @@ const renderWatchlist = async () => {
   useEffect(() => {
     if (!userData.user) history.push("/login");
     renderWatchlist();
-    updateQuote();
   }, [userData.user, history]);
 
   return (
@@ -120,11 +124,7 @@ const renderWatchlist = async () => {
             <Card isShown={show}>
               <p onClick={async () => {
                 let saveTicker = {
-                  ticker:result.financial.symbol,
-                  name:result.profile.name,
-                  last:result.quote.pc,
-                  high:result.quote.h,
-                  low:result.quote.l,
+                  ticker:result.symbol,
                 };
                 // adds ticker to watchlist
                 await Axios.post("/users/addWatchlist", saveTicker, {
