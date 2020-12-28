@@ -7,41 +7,62 @@ const User = require("../models/userModel");
 
 //load Profile
 
-//load FinHub
+// TEST IEX API
 
 router.get("/quote/:symbol", async (req,res) => {
-    try{
-        let result = {}
-        const symbol = req.params.symbol
-      await Axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${process.env.FIN_TOKEN}`)
-      .then((res)=> result.quote = res.data)
-      await Axios.get(`https://finnhub.io/api/v1//stock/metric?symbol=${symbol}&metric=all&token=${process.env.FIN_TOKEN}`)
-      .then((res)=> result.financial = res.data)
-      await Axios.get(`https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${process.env.FIN_TOKEN}`)
-      .then((res) => result.profile = res.data)
-      await Axios.get(`https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=2020-04-30&to=2020-05-01&token=${process.env.FIN_TOKEN}`)
-      .then((res) => result.news = res.data)
-      await Axios.get(`https://finnhub.io/api/v1 /stock/candle?symbol=${symbol}&resolution=1&from=1605543327&to=1605629727&token=${process.env.FIN_TOKEN}`)
-      .then((res) => result.candles = res.data)
-      
-      res.send(result)
-    }
-    catch(err){
-        res.status(500).json({ error: err.message });
-      }
-    
+  try {
+    let result;
+    const symbol = req.params.symbol;
+    await Axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.IEX_TOKEN}`)
+    .then((res) => result = res.data)
+
+    res.send(result)
+  } catch(err){
+    res.status(500).json({ error: err.message });
+  }
 })
+
+
+//load FinHub MIGHT NOT NEED THIS ANYMORE
+
+// router.get("/quote/:symbol", async (req,res) => {
+//     try{
+//         let result = {}
+//         const symbol = req.params.symbol
+//       await Axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${process.env.FIN_TOKEN}`)
+//       .then((res)=> result.quote = res.data)
+//       await Axios.get(`https://finnhub.io/api/v1//stock/metric?symbol=${symbol}&metric=all&token=${process.env.FIN_TOKEN}`)
+//       .then((res)=> result.financial = res.data)
+//       await Axios.get(`https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${process.env.FIN_TOKEN}`)
+//       .then((res) => result.profile = res.data)
+//       await Axios.get(`https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=2020-04-30&to=2020-05-01&token=${process.env.FIN_TOKEN}`)
+//       .then((res) => result.news = res.data)
+//       await Axios.get(`https://finnhub.io/api/v1 /stock/candle?symbol=${symbol}&resolution=1&from=1605543327&to=1605629727&token=${process.env.FIN_TOKEN}`)
+//       .then((res) => result.candles = res.data)
+      
+//       res.send(result)
+//     }
+//     catch(err){
+//         res.status(500).json({ error: err.message });
+//       }
+    
+// })
+
+router.get("/find/:id", auth, async (req, res) => {
+  const quote = await Quote.findOne({ userId: req.user, _id: req.params.id });
+  res.json(quote.ticker);
+});
 
 router.post("/addWatchlist", auth, async (req, res) => {
   try {
-    const { ticker,name,last,high,low } = req.body;
+    const { ticker } = req.body;
 
     //validation
-    if (!ticker || !name || !last || !high || !low )
-      return res.status(400).json({ msg: "Not all fields have been entered." });
+    if (!ticker)
+      return res.status(400).json({ msg: "No ticker found" });
 
     const watchList = new Quote({
-      ticker, name, last, high, low,userId: req.user,
+      ticker,userId: req.user,
     });
     const savedQuote = await watchList.save();
     res.json(savedQuote);

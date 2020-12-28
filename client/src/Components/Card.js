@@ -5,13 +5,20 @@ import {
 } from 'reactstrap';
 
 const TickerCard = (props) => {
+  const isShown = props.isShown;
+  if (isShown) {
+    return (
+      <div>
+        <Card>
+          <CardBody>
+    <CardText>{props.children}</CardText>
+          </CardBody>
+        </Card>
+      </div>
+    );
+  }
   return (
     <div>
-      <Card>
-        <CardBody>
-  <CardText>{props.children}</CardText>
-        </CardBody>
-      </Card>
     </div>
   );
 };
