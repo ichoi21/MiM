@@ -9,12 +9,12 @@ const User = require("../models/userModel");
 
 // TEST IEX API
 
-router.get("/test/:symbol", async (req,res) => {
+router.get("/quote/:symbol", async (req,res) => {
   try {
-    let result = {};
+    let result;
     const symbol = req.params.symbol;
     await Axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.IEX_TOKEN}`)
-    .then((res) => result.quote = res.data)
+    .then((res) => result = res.data)
 
     res.send(result)
   } catch(err){
@@ -22,9 +22,10 @@ router.get("/test/:symbol", async (req,res) => {
   }
 })
 
+
 //load FinHub
 
-router.get("/quote/:symbol", async (req,res) => {
+router.get("/test/:symbol", async (req,res) => {
     try{
         let result = {}
         const symbol = req.params.symbol
