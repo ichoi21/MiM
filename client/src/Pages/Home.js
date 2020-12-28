@@ -81,7 +81,7 @@ const renderWatchlist = async () => {
       placeHolder.push(res.data[i].ticker)
     }
      for (let i = 0; i < placeHolder.length; i++) {
-      Finnhub.getData(placeHolder[i]).then((res) => {
+      await Finnhub.getData(placeHolder[i]).then((res) => {
         let item = {
           symbol: res.data.symbol,
           name: res.data.companyName,
@@ -94,14 +94,12 @@ const renderWatchlist = async () => {
       })
     }
     setRowInfo(rows);
-    console.log(rows);
   });
 };
 
   useEffect(() => {
     if (!userData.user) history.push("/login");
     renderWatchlist();
-    updateQuote();
   }, [userData.user, history]);
 
   return (
