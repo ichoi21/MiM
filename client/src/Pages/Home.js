@@ -23,6 +23,7 @@ const [result, setResult] = useState([]);
 const [watchlist, setWatchlist] = useState([]);
 const [rowInfo, setRowInfo] = useState([]);
 const [show, setShow] = useState(false);
+const placeHolder = [];
 let rows = [];
 
 
@@ -77,18 +78,23 @@ const renderWatchlist = async () => {
   }).then((res) => {
     setWatchlist(res.data);
     for (let i = 0; i < res.data.length; i++) {
-      let item ={
-          id: res.data[i]._id,
-          symbol: res.data[i].ticker,
-          name: res.data[i].name,
-          last: res.data[i].last,
-          high: res.data[i].high,
-          low: res.data[i].low,
-          vol: "n/a"
-      }
-      rows.push(item)
+      placeHolder.push(res.data[i].ticker)
+    }
+    for (let i = 0; i < placeHolder.length; i++) {
+      Finnhub.getData(placeHolder[i]).then((res) => {
+        let rez = res.data;
+        let item = {
+          symbol: rez.symbol,
+          name: rez.companyName,
+          last: rez.latestPrice,
+          high: rez.high,
+          low:  rez.low,
+        }
+        rows.push(item)
+      })
     }
     setRowInfo(rows);
+    console.log(rows);
   });
 };
 
@@ -106,7 +112,7 @@ const renderWatchlist = async () => {
         {indices.map((item,index) => {
           return (
             <Grid item sm={3}>
-              <Card text={item}/>
+              <Card text={item} isShown={true}/>
             </Grid>
           )
         })}
@@ -120,11 +126,7 @@ const renderWatchlist = async () => {
             <Card isShown={show}>
               <p onClick={async () => {
                 let saveTicker = {
-                  ticker:result.financial.symbol,
-                  name:result.profile.name,
-                  last:result.quote.pc,
-                  high:result.quote.h,
-                  low:result.quote.l,
+                  ticker:result.symbol,
                 };
                 // adds ticker to watchlist
                 await Axios.post("/users/addWatchlist", saveTicker, {
