@@ -44,33 +44,6 @@ const getTicker = (id) => {
   }); 
 }
 
-// Auto update watchlist under construction
-const updateQuote = () => {
-for (let i = 0; i < rows.length; i++) {
-  Finnhub.getData(rows[i].symbol.then((res) =>{
-   let updatedQuote = {
-      ticker: res.data.financial.symbol,
-      name: res.data.profile.name,
-      last: res.data.quote.pc,
-      high: res.data.quote.h,
-      low: res.data.quote.l,
-    }
-    // await Axios.patch(
-    //   `/users/edit/${res.data._id}`,
-    //   updatedQuote,
-    //   {
-    //     headers: {
-    //       "x-auth-token": localStorage.getItem(
-    //         "auth-token"
-    //       ),
-    //     },
-    //   }
-    // );
-    // renderWatchlist();
-  }))
-}
-}
-
 //renders watchlist
 const renderWatchlist = async () => {
   await Axios.get("/users/renderWatchlist", {
@@ -164,7 +137,7 @@ const renderWatchlist = async () => {
             </Card>
       </Grid>
       <Grid container item sm={6}>
-        <Table rows={rowInfo}/>
+        <Table rows={rowInfo} />
       </Grid>
       <Footer/>
     </Grid>
