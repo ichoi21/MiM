@@ -3,10 +3,10 @@ import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../Context/UserContext";
-import SearchBar from "../Components/SearchBar";
+import SearchBar from "../Components/SearchBar/index";
 import Table from "../Components/Table/index";
 import SearchContent from "../Components/SearchContent";
-import Footer from "../Components/Footer"
+import Footer from "../Components/Footer";
 import {Col, Row} from 'reactstrap';
 import Finnhub from "../api/finnhub";
 import Card from "../Components/Card";
