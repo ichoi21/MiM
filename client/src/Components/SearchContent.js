@@ -124,7 +124,7 @@ const SearchContent = ({ticker, open, vol, marketCap,fwh, fwl, pefwd,eps, turnov
         </Col>
         </Row>
         <Row>
-        <TradeView symbol={ticker} />
+        <TradeView autosize symbol={ticker} />
         </Row>
         </>
                 )
