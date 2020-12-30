@@ -45,8 +45,8 @@ export default function SearchBar(props) {
 
 <div className={classes.root}>
   <div className={classes.search}>
-    <SearchIcon />
-    <InputBase placeholder="Search for a Symbol…" onChange={props.onChange} onClick={props.onClick}
+    <SearchIcon onClick={props.onClick}/>
+    <InputBase  placeholder="Search for a Symbol…" onChange={props.onChange} 
     classes={{
       root: classes.inputRoot,
       input: classes.inputInput,

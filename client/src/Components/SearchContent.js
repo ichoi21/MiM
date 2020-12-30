@@ -2,9 +2,11 @@ import React from 'react';
 import {
     Col, Row
   } from 'reactstrap';
+  import TradeView from 'react-tradingview-widget'
 
 const SearchContent = ({ticker, open, vol, marketCap,fwh, fwl, pefwd,eps, turnover, pturnover,sharesOut,ffmc , threeMonth, name, last, high, low,range, pettm, dividend, divYield, pb, freeFloat, beta, edd, lotSize}) => {
     return (
+        <>
         <Row>
         <Col>
         <thead>
@@ -121,6 +123,10 @@ const SearchContent = ({ticker, open, vol, marketCap,fwh, fwl, pefwd,eps, turnov
         </tbody>
         </Col>
         </Row>
+        <Row>
+        <TradeView symbol={ticker} />
+        </Row>
+        </>
                 )
 }
 

@@ -4,6 +4,7 @@ import {
   CardTitle, CardSubtitle
 } from 'reactstrap';
 
+
 const TickerCard = (props) => {
   const isShown = props.isShown;
   if (isShown) {
