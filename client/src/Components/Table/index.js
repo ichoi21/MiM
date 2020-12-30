@@ -49,9 +49,30 @@ let rows = props.rows;
     columns: columns,
     rows: rows,
   };
+  const [checkbox1, setCheckbox1] = React.useState([]);
+
+  const showLogs2 = (e) => {
+    setCheckbox1(e);
+  };
 
 
-  return <MDBDataTableV5 striped sortable hover paging={false} data={data} />;
+  return <MDBDataTableV5 
+  striped 
+  sortable 
+  hover 
+  paging={false} 
+//   checkbox
+//   headCheckboxID='id6'
+//   bodyCheckboxID='checkboxes6'
+//   getValueCheckBox={(e) => {
+//     showLogs2(e);
+//   }}
+//   getValueAllCheckBoxes={(e) => {
+//     showLogs2(e);
+//   }}
+//   multipleCheckboxes 
+  data={data} />;
 }
 
 export default Table;
+
