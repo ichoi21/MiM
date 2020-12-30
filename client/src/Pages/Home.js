@@ -83,8 +83,9 @@ const renderWatchlist = async () => {
         {indices.map((item,index) => {
           return (
             <Grid container item sm={3}>
-              <Card text={item}isShown={true}/>
+              {/* <Card text={item}isShown={true}/> */}
             </Grid>
+            
           )
         })}
       </Grid>
