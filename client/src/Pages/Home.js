@@ -10,6 +10,7 @@ import Footer from "../Components/Footer";
 import {Col, Row} from 'reactstrap';
 import Finnhub from "../api/finnhub";
 import Card from "../Components/Card";
+import Chart from "../Components/Chart/index"
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -85,6 +86,7 @@ const renderWatchlist = async () => {
             <Grid container item sm={3}>
               <Card text={item}isShown={true}/>
             </Grid>
+            
           )
         })}
       </Grid>
@@ -94,6 +96,7 @@ const renderWatchlist = async () => {
       </Grid>
         
       <Grid container item sm={6}>
+            {/* <Chart isShown={show}/> */}
             <Card isShown={show}>
               <p onClick={async () => {
                 let saveTicker = {
