@@ -22,6 +22,18 @@ router.get("/quote/:symbol", async (req,res) => {
   }
 })
 
+// get sector performance data
+router.get("/sectors", async (req,res) => {
+  try{
+    let result;
+    await Axios.get(`https://cloud.iexapis.com/stable/stock/market/sector-performance?token=${process.env.IEX_TOKEN}`)
+    .then((res) => result = res.data)
+    res.send(result)
+  } catch(err){
+    res.status(500).json({ error: err.message });
+  }
+})
+
 
 //load FinHub MIGHT NOT NEED THIS ANYMORE
 
