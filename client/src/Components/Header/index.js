@@ -4,13 +4,11 @@ import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import MenuIcon from '@material-ui/icons/Menu';
+import {Time,Date} from "../Time/index"
 import Axios from "axios";
 import React,{ useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-
 import UserContext from "../../Context/UserContext";
-
 import "./Header.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,8 +22,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
-
-
 
  const Header=()=> {
   const {userData, setUserData} = useContext(UserContext);
@@ -52,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
           <Typography variant="h6" className={classes.title} onClick={home}>
             dMiM $tock Watch
           </Typography>
+          <Date timeZone="America/Los_Angeles"/>
+          <Time timeZone="America/New_York"/>
+          <Time timeZone="America/Los_Angeles"/>
           {userData.user ? (
             <>
             <Button color="inherit" onClick={scanner}>Scanner</Button>
