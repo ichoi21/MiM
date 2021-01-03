@@ -9,7 +9,7 @@ import SearchContent from "../Components/SearchContent";
 import Footer from "../Components/Footer";
 import {Col, Row} from 'reactstrap';
 import Finnhub from "../api/finnhub";
-import Card from "../Components/Card";
+import {TickerCard,NewsCard} from "../Components/Card";
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -19,6 +19,7 @@ const Home = () => {
 const [search, setSearch] = useState("");
 // const [quote, setQuote] = useState([]);
 const [error, setError] = useState();
+const [news, setNews] = useState([]);
 const [result, setResult] = useState([]);
 const [watchlist, setWatchlist] = useState([]);
 const [rowInfo, setRowInfo] = useState([]);
@@ -44,6 +45,8 @@ const getTicker = (id) => {
   }); 
 }
 
+//get news for Watchlist
+
 //renders watchlist
 const renderWatchlist = async () => {
   await Axios.get("/users/renderWatchlist", {
@@ -52,6 +55,8 @@ const renderWatchlist = async () => {
     setWatchlist(res.data);
      for (let i = 0; i < res.data.length; i++) {
       placeHolder.push(res.data[i].ticker)
+      await Axios.get(`/users/news/${res.data[i].ticker}`)
+      .then((res) => setNews(...news, res.data))
     }
      for (let i = 0; i < placeHolder.length; i++) {
       await Finnhub.getData(placeHolder[i]).then((res) => {
@@ -78,12 +83,12 @@ const renderWatchlist = async () => {
   return (
     <>
     <Grid container spacing={2} justify="center" style={{ padding: 10 }}>
-      {/* Major Indices Cards */}
+      {/* Major Indices TickerCards */}
       <Grid container item sm={6} lg={10} spacing={2} alignItems="center">
         {indices.map((item,index) => {
           return (
             <Grid container item sm={3}>
-              {/* <Card text={item}isShown={true}/> */}
+              {/* <TickerCard text={item}isShown={true}/> */}
             </Grid>
             
           )
@@ -95,7 +100,7 @@ const renderWatchlist = async () => {
       </Grid>
         
       <Grid container item sm={6}>
-            <Card isShown={show}>
+            <TickerCard isShown={show}>
               <p onClick={async () => {
                 let saveTicker = {
                   ticker:result.symbol,
@@ -135,11 +140,19 @@ const renderWatchlist = async () => {
                 // beta={result.financial.metric.beta}
                 // // edd={}
                 />
-            </Card>
+            </TickerCard>
       </Grid>
       <Grid container item sm={6}>
         <Table rows={rowInfo} />
       </Grid>
+      <Grid container >
+        {news.map((item,key) => {
+          console.log(news);
+          return (
+          <NewsCard image={item.image} headline={item.headline} summary={item.summary}/>
+          )
+        })}
+        </Grid>
       <Footer/>
     </Grid>
   </>
