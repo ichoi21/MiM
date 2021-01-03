@@ -7,10 +7,13 @@ import UserContext from "./Context/UserContext";
 import Callresults from "./Pages/Callresults";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
-import News from "./Pages/News"
+import News from "./Pages/News";
 import Scanner from "./Pages/Scanner";
-import Settings from "./Pages/Settings"
+import Settings from "./Pages/Settings";
 import Signup from "./Pages/Signup";
+import Educate from "./Pages/Educate";
+import About from "./Pages/About";
+import Disclaimer from "./Pages/Disclaimer";
 
 // import SignIn from "./Components/SignIn";
 
@@ -68,6 +71,9 @@ function App() {
             <Route path="/news" component={News} />
             <Route path="/Settings" component={Settings} />
             <Route path="/callresults" component={Callresults} />
+            <Route path="/educate" component={Educate} />
+            <Route path="/about" component={About} />
+            <Route path="/disclaimer" component={Disclaimer} />
          
           </Switch>
         </UserContext.Provider>

@@ -1,13 +1,13 @@
 import React from 'react'
 import Footer from '../Components/Footer'
 
-function About() {
+function Disclaimer() {
   return (
     <div>
-    <h1>About Us</h1>
+    <h1>Disclaimer</h1>
     <Footer />
     </div>
   )
 }
 
-export default About
+export default Disclaimer

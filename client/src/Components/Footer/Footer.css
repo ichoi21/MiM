@@ -2,6 +2,13 @@
   background-color: #343a38;
 }
 
+.footerFooter {
+  background-color: #588868;
+  justify-content: center;
+  flex-direction: row;
+  max-height: 4vh;
+}
+
 .text-color,
 .text-color a {
   color: white;
