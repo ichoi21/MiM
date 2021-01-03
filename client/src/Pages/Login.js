@@ -4,8 +4,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createMuiTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
+
 import UserContext from "../Context/UserContext";
 
 import "./Styles.css";
@@ -17,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/featured/?invest)',
+    backgroundImage: 'url(https://source.unsplash.com/featured/?investment)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'dark' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -44,7 +43,7 @@ function Copyright() {
     <Typography variant="body2" color="success" align="center">
       <div className="text">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="/">
         DMi$
       </Link>{' '}
       {new Date().getFullYear()}
