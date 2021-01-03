@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   const {userData, setUserData} = useContext(UserContext);
   const history = useHistory();
   const scanner = () => history.push("/scanner");
-  const callresults = () => history.push("/callresults");
+  const dsp = () => history.push("/dsp");
   const home = () => history.push("/");
   const news = () => history.push("/news");
   // const signup = () => history.push("/signup");
@@ -78,9 +78,9 @@ const useStyles = makeStyles((theme) => ({
   const sectionLinks = [
     // {userData.user ? (
     //   <>
+      <Button color="inherit" onClick={news}>Portfolio</Button>,
       <Button color="inherit" onClick={scanner}>Scanner</Button>,
-      <Button color="inherit" onClick={news}>Market</Button>,
-      <Button color="inherit" onClick={callresults}>1DSP</Button>,
+      <Button color="inherit" onClick={dsp}>1DSP</Button>,
       <Button color="inherit" onClick={logout}>Logout<ExitToApp /></Button>
     //   </>
     // ):(
