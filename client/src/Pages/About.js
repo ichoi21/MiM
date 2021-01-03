@@ -1,9 +1,11 @@
 import React from 'react'
+import Footer from '../Components/Footer'
 
 function About() {
   return (
     <div>
-    <h1>Hello from About</h1>
+    <h1>About Us</h1>
+    <Footer />
     </div>
   )
 }
