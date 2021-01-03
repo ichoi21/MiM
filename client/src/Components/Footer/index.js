@@ -3,15 +3,16 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import "./Footer.css";
 
 function Copyright() {
   return (
-    <Typography variant="body2" className="text-color" align="left">
+    <Typography variant="body2" className="text-color" align="center">
       {"Copyright © "}
       <Link color="inherit" href="/">
-        DMiM
+        DMi$
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -27,10 +28,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Footer = () => {
   const classes = useStyles();
+  const history = useHistory();
+  const educate = () => history.push("/educate");
+  const settings = () => history.push("/settings");
+  const about = () => history.push("/about");
+  const disclaimer = () => history.push("/disclaimer");
   return (
     <div className={classes.root}>
-      <Grid container>
-        <Grid className="footerColor footer-pos" item xs={6} sm={4}>
+      <Grid container className="footerColor">
+        <Grid className="footer-pos" item xs={12} sm={4}>
           <div className="text-color text-link">
             <p>
               <b>Let's Get that GREEN!</b>
@@ -40,26 +46,29 @@ const Footer = () => {
             </p>
           </div>
         </Grid>
-        <Grid item xs={12} sm={4} className="footerColor footer-pos2">
+        <Grid item xs={6} sm={4} className="footer-pos2">
           <div id="Footer">
-            <div className="text-color" id="FooterLinks">
+            <div className="text-color text-link" id="FooterLinks">
               <p>
                 <b>MORE</b>
               </p>
-              <Link color="inherit" href="/Education">
+              <Link color="inherit" onClick={educate}>
                 Education
               </Link>{" "}
-              <Link color="inherit" href="/Profile">
+              <Link color="inherit" onClick={settings}>
                 Settings
-              </Link>{""}
-              <Link color="inherit" href="/About">
+              </Link>{" "}
+              <Link color="inherit" onClick={about}>
                 About Us
               </Link>{" "}
+              <Link color="inherit" onClick={disclaimer}>
+                Disclaimer
+              </Link>
             </div>
           </div>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <div className="footerColor footer-pos" id="Footer">
+        <Grid item xs={6} sm={4}>
+          <div className="footer-pos2" id="Footer">
             <div className="text-color" id="FooterLinks">
               <p>
                 <b>FOLLOW US</b>
@@ -71,7 +80,7 @@ const Footer = () => {
           </div>
         </Grid>
       </Grid>
-      <Grid container className="footerColor">
+      <Grid container className="footerFooter">
         <Grid item xs={12} className="copyright">
           <Copyright />
         </Grid>

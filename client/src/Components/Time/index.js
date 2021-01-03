@@ -1,6 +1,6 @@
-import React from 'react'
 import moment from 'moment'
 import tz from 'moment-timezone'
+import React from 'react'
 
 export const Time = (props) => {
     const [time, setTime] = React.useState("");
@@ -16,7 +16,7 @@ export const Time = (props) => {
     }, [])
     
     return (
-    <h5>{time}</h5>
+    <div>{time}</div>
     )
 }
 
@@ -25,7 +25,7 @@ export const Date = (props) => {
 
     const getTime =  () => {
         var currentTime =  tz();
-        const timeZone = currentTime.tz(props.timeZone).format('MMMM Do YYYY')
+        const timeZone = currentTime.tz(props.timeZone).format('MMMM Do, YYYY')
         setTime(timeZone);
     }
 
@@ -34,7 +34,7 @@ export const Date = (props) => {
     }, [])
     
     return (
-        <h5>{time}</h5>
+        <div>{time}</div>
     )
     }
 
