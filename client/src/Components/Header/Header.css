@@ -1,8 +1,50 @@
-.headerColor {
-  background-color: #343a38;
-}
-
 .text-color,
 .text-color a {
   color: white;
+}
+
+.App-header {
+  max-height: 15vh;
+  background-color: #212121;
+  position: fixed;
+  text-decoration: none;
+}
+
+.MuiSvgIcon-root {
+  color: white;
+}
+
+.MuiButton-label a {
+  color: white;
+}
+
+.Header {
+  max-height: 15vh;
+  height: 5vh;
+  position: absolute;
+  z-index: 5;
+}
+
+.MuiPaper-root {
+  background-color: #343a38 !important;
+}
+
+.logo {
+  width: 20%;
+  height: auto;
+}
+
+.parentList {
+  display: flex;
+  justify-content: space-between;
+  /* align-content: center; */
+}
+
+.childList {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.MuiListItem-root {
+  width: auto !important;
 }
