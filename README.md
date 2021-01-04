@@ -15,11 +15,9 @@ A dashboard which assist the user with their stocks investment portfolio.
 
 ## Team Members
 
-[![All Contributors](https://img.shields.io/badge/contributors-3-yellow)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/contributors-2-yellow)](#contributors-)
 
-- [Danielle Arias](https://github.com/drias321)
 - [Myhkas Nallas](https://github.com/mnallas)
-- [Michelle Tran](https://github.com/m-tran)
 - [Ian Choi](https://github.com/ichoi21)
 
 ## Build status

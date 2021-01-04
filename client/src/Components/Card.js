@@ -1,32 +1,29 @@
 import React from 'react';
-import {
-  Card, CardText, CardBody
-} from 'reactstrap';
+import { Card, CardContent, Typography } from '@material-ui/core';
+import Hero2 from "../Components/Hero2";
 import { makeStyles } from '@material-ui/core/styles';
-import Cards from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+
 
 export const TickerCard = (props) => {
   const isShown = props.isShown;
   if (isShown) {
     return (
-      
         <Card>
-          <CardBody>
-    <CardText>{props.children}</CardText>
-          </CardBody>
+          <CardContent>
+            <Typography>{props.children}</Typography>
+          </CardContent>
         </Card>
 
     );
   }
   return (
-    <div>
-    </div>
+    <Card>
+      <Hero2 />
+    </Card>
   );
 };
 
@@ -35,7 +32,7 @@ export const NewsCard = ({image,headline,summary}) => {
   const classes = useStyles();
 
   return (
-    <Cards className={classes.root}>
+    <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -51,7 +48,7 @@ export const NewsCard = ({image,headline,summary}) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-    </Cards>
+    </Card>
   );
 }
 
