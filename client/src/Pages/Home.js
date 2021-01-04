@@ -1,4 +1,4 @@
-import { Grid, Link, makeStyles, spacing, Typography } from "@material-ui/core";
+import { Grid, Card, Link, makeStyles, spacing, Typography } from "@material-ui/core";
 import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -11,7 +11,7 @@ import Sector from "../Components/Sector/index"
 import Table from "../Components/Table/index";
 import Footer from "../Components/Footer";
 import Finnhub from "../api/finnhub";
-import {TickerCard,NewsCard} from "../Components/Card";
+import { TickerCard, NewsCard } from "../Components/Card";
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -100,10 +100,10 @@ const renderWatchlist = async () => {
       <Grid container item sm={12} lg={12} justify="center">
         <SearchBar onChange={(e)=> setSearch(e.target.value)} onClick={getQuote}/>
       </Grid>
-      {/* Sector display */}
-      <Grid container sm={6}>
+      {/* Sector display
+      <Grid container item sm={12} lg={12}>
         <Sector/>
-      </Grid>
+      </Grid> */}
       {/* Search Result */}
       <Grid container item sm={12} lg={9} justify="center">
         {/* <SymbolWatch/> */}
@@ -154,12 +154,12 @@ const renderWatchlist = async () => {
       <Grid container item sm={12} lg={3} justify="center">
         <Table rows={rowInfo} />
       </Grid>
-      <Grid container sm={12}>
+      <Grid container item sm={12} justify="center">
         {news.map((item) => {
           return (
-            <Grid xs={3}>
+            <Card >
           <NewsCard image={item.image} headline={item.headline} summary={item.summary}/>
-          </Grid>
+          </Card>
           )
         })}
         </Grid>
