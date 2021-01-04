@@ -6,6 +6,7 @@ import UserContext from "../Context/UserContext";
 import Hero from "../Components/Hero"
 import SearchBar from "../Components/SearchBar/index";
 import SearchContent from "../Components/SearchContent/index"
+import Sector from "../Components/Sector/index"
 // import SymbolWatch from "../Components/SymbolWatch";
 import Table from "../Components/Table/index";
 import Footer from "../Components/Footer";
@@ -18,7 +19,6 @@ const Home = () => {
   const indices = ["S&P 500", "NASDAQ", "DJIA", "RUSSELL"];
 
 const [search, setSearch] = useState("");
-// const [quote, setQuote] = useState([]);
 const [error, setError] = useState();
 const [news, setNews] = useState([]);
 const [result, setResult] = useState([]);
@@ -100,6 +100,10 @@ const renderWatchlist = async () => {
       <Grid container item sm={12} lg={12} justify="center">
         <SearchBar onChange={(e)=> setSearch(e.target.value)} onClick={getQuote}/>
       </Grid>
+      {/* Sector display */}
+      <Grid container sm={6}>
+        <Sector/>
+      </Grid>
       {/* Search Result */}
       <Grid container item sm={12} lg={9} justify="center">
         {/* <SymbolWatch/> */}
@@ -150,11 +154,12 @@ const renderWatchlist = async () => {
       <Grid container item sm={12} lg={3} justify="center">
         <Table rows={rowInfo} />
       </Grid>
-      <Grid container >
-        {news.map((item,key) => {
-          console.log(news);
+      <Grid container sm={12}>
+        {news.map((item) => {
           return (
+            <Grid xs={3}>
           <NewsCard image={item.image} headline={item.headline} summary={item.summary}/>
+          </Grid>
           )
         })}
         </Grid>
