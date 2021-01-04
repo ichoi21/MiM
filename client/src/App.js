@@ -11,7 +11,6 @@ import Scanner from "./Pages/Scanner";
 import Settings from "./Pages/Settings";
 import Signup from "./Pages/Signup";
 import Educate from "./Pages/Educate";
-import About from "./Pages/About";
 import Disclaimer from "./Pages/Disclaimer";
 
 import "./App.css";
@@ -73,7 +72,6 @@ function App() {
             <Route path="/Settings" component={Settings} />
             <Route path="/Dsp" component={Dsp} />
             <Route path="/educate" component={Educate} />
-            <Route path="/about" component={About} />
             <Route path="/disclaimer" component={Disclaimer} />
          
           </Switch>
