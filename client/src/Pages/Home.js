@@ -3,13 +3,14 @@ import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../Context/UserContext";
+import Hero from "../Components/Hero"
 import SearchBar from "../Components/SearchBar/index";
+import SearchContent from "../Components/SearchContent/index"
+// import SymbolWatch from "../Components/SymbolWatch";
 import Table from "../Components/Table/index";
-import SearchContent from "../Components/SearchContent";
 import Footer from "../Components/Footer";
-import {Col, Row} from 'reactstrap';
 import Finnhub from "../api/finnhub";
-import Card from "../Components/Card";
+import TickerCard from "../Components/Card";
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -77,25 +78,28 @@ const renderWatchlist = async () => {
 
   return (
     <>
-    <Grid container spacing={2} justify="center" style={{ padding: 10 }}>
+    <Grid container spacing={2} justify="center" style={{ padding: 25 }}>
       {/* Major Indices Cards */}
-      <Grid container item sm={6} lg={10} spacing={2} alignItems="center">
-        {indices.map((item,index) => {
+      <Grid container item sm={12} spacing={2} justify="center" alignItems="center">
+        {/* {indices.map((item,index) => {
           return (
             <Grid container item sm={3}>
-              {/* <Card text={item}isShown={true}/> */}
+              <Card text={item}isShown={true}/> 
             </Grid>
             
           )
-        })}
+        })} */}
+        <Hero/>
       </Grid>
       {/* Stocks Search */}
-      <Grid container item sm={10} lg={8} justify="center">
+      <Grid container item sm={12} lg={12} justify="center">
         <SearchBar onChange={(e)=> setSearch(e.target.value)} onClick={getQuote}/>
       </Grid>
-        
-      <Grid container item sm={6}>
-            <Card isShown={show}>
+      {/* Search Result */}
+      <Grid container item sm={12} lg={9} justify="center">
+        {/* <SymbolWatch/> */}
+        {/* Would like to move 103-143 into its own component named above */}
+        <TickerCard isShown={show}>
               <p onClick={async () => {
                 let saveTicker = {
                   ticker:result.symbol,
@@ -135,9 +139,10 @@ const renderWatchlist = async () => {
                 // beta={result.financial.metric.beta}
                 // // edd={}
                 />
-            </Card>
+            </TickerCard>
       </Grid>
-      <Grid container item sm={6}>
+      {/* User's Watchlist */}
+      <Grid container item sm={12} lg={3} justify="center">
         <Table rows={rowInfo} />
       </Grid>
       <Footer/>

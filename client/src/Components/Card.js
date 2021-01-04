@@ -1,25 +1,23 @@
 import React from 'react';
-import {
-  Card, CardText, CardBody
-} from 'reactstrap';
-
+import { Card, CardContent, Typography } from '@material-ui/core';
+import Hero2 from "../Components/Hero2";
 
 const TickerCard = (props) => {
   const isShown = props.isShown;
   if (isShown) {
     return (
-      
         <Card>
-          <CardBody>
-    <CardText>{props.children}</CardText>
-          </CardBody>
+          <CardContent>
+            <Typography>{props.children}</Typography>
+          </CardContent>
         </Card>
 
     );
   }
   return (
-    <div>
-    </div>
+    <Card>
+      <Hero2 />
+    </Card>
   );
 };
 

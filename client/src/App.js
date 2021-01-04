@@ -4,10 +4,9 @@ import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 
 import Header from "./Components/Header";
 import UserContext from "./Context/UserContext";
-import Callresults from "./Pages/Callresults";
+import Dsp from "./Pages/Dsp";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
-import News from "./Pages/News";
 import Scanner from "./Pages/Scanner";
 import Settings from "./Pages/Settings";
 import Signup from "./Pages/Signup";
@@ -15,7 +14,10 @@ import Educate from "./Pages/Educate";
 import About from "./Pages/About";
 import Disclaimer from "./Pages/Disclaimer";
 
+import "./App.css";
+
 // import SignIn from "./Components/SignIn";
+// import News from "./Pages/News";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -68,9 +70,8 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/scanner" component={Scanner} />
-            <Route path="/news" component={News} />
             <Route path="/Settings" component={Settings} />
-            <Route path="/callresults" component={Callresults} />
+            <Route path="/Dsp" component={Dsp} />
             <Route path="/educate" component={Educate} />
             <Route path="/about" component={About} />
             <Route path="/disclaimer" component={Disclaimer} />

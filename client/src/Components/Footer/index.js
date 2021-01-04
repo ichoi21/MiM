@@ -48,7 +48,7 @@ const Footer = () => {
         </Grid>
         <Grid item xs={6} sm={4} className="footer-pos2">
           <div id="Footer">
-            <div className="text-color" id="FooterLinks">
+            <div className="text-color text-link" id="FooterLinks">
               <p>
                 <b>MORE</b>
               </p>

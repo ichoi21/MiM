@@ -1,7 +1,7 @@
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
-import Form from '@material-ui/core';
+import { Form, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,13 +13,14 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     searchIcon: {
-      padding: theme.spacing(0, 2),
+    //   padding: theme.spacing(0, 2),
       height: '80%',
-      position: 'absolute',
-      pointerEvents: 'none',
+    //   position: 'absolute',
+    //   pointerEvents: 'none',
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      textColor: 'black',
+    //   alignItems: 'center',
+    //   justifyContent: 'center',
     },
     inputRoot: {
       color: 'inherit',
@@ -45,7 +46,6 @@ export default function SearchBar(props) {
 
 <div className={classes.root}>
   <div className={classes.search}>
-    <SearchIcon onClick={props.onClick}/>
     <InputBase  placeholder="Search for a Symbol…" onChange={props.onChange} 
     classes={{
       root: classes.inputRoot,
@@ -53,6 +53,8 @@ export default function SearchBar(props) {
     }}
     inputProps={{ 'aria-label': 'search' }}
     />
+    <Button onClick={props.onClick} color="success"><SearchIcon /></Button>
+
   </div>
 </div>
   );
