@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   const scanner = () => history.push("/scanner");
   const dsp = () => history.push("/dsp");
   const home = () => history.push("/");
-  const news = () => history.push("/news");
+  const portfolio = () => history.push("/portfolio");
   // const signup = () => history.push("/signup");
   const logout = () => {
     setUserData({
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   const sectionLinks = [
     // {userData.user ? (
     //   <>
-      <Button color="inherit" onClick={news}>Portfolio</Button>,
+      <Button color="inherit" onClick={portfolio}>Portfolio</Button>,
       <Button color="inherit" onClick={scanner}>Scanner</Button>,
       <Button color="inherit" onClick={dsp}>1DSP</Button>,
       <Button color="inherit" onClick={logout}>Logout<ExitToApp /></Button>

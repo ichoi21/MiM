@@ -8,10 +8,10 @@ import Dsp from "./Pages/Dsp";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Scanner from "./Pages/Scanner";
+import Portfolio from "./Pages/Portfolio";
 import Settings from "./Pages/Settings";
 import Signup from "./Pages/Signup";
 import Educate from "./Pages/Educate";
-import About from "./Pages/About";
 import Disclaimer from "./Pages/Disclaimer";
 
 import "./App.css";
@@ -69,11 +69,11 @@ function App() {
            <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/portfolio" component={Portfolio} />
             <Route path="/scanner" component={Scanner} />
             <Route path="/Settings" component={Settings} />
             <Route path="/Dsp" component={Dsp} />
             <Route path="/educate" component={Educate} />
-            <Route path="/about" component={About} />
             <Route path="/disclaimer" component={Disclaimer} />
          
           </Switch>
