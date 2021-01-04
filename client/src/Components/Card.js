@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import Hero2 from "../Components/Hero2";
+import Sector from "../Components/Sector";
 import { makeStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -22,6 +23,7 @@ export const TickerCard = (props) => {
   }
   return (
     <Card>
+      <Sector />
       <Hero2 />
     </Card>
   );
