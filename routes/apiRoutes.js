@@ -34,7 +34,19 @@ router.get("/sectors", async (req,res) => {
   }
 })
 
-
+// get news for watchlist
+router.get("/news/:symbol", async (req,res) => {
+  try {
+    let result;
+    const {symbol, count} = req.params;
+    await Axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/news/last/1?token=${process.env.IEX_TOKEN}`)
+    .then((res) => result = res.data)
+    res.send(result)
+  }
+  catch(err){
+    res.status(500).json({ error: err.message });
+  }
+})
 //load FinHub MIGHT NOT NEED THIS ANYMORE
 
 // router.get("/quote/:symbol", async (req,res) => {

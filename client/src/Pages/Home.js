@@ -6,11 +6,12 @@ import UserContext from "../Context/UserContext";
 import Hero from "../Components/Hero"
 import SearchBar from "../Components/SearchBar/index";
 import SearchContent from "../Components/SearchContent/index"
+import Sector from "../Components/Sector/index"
 // import SymbolWatch from "../Components/SymbolWatch";
 import Table from "../Components/Table/index";
 import Footer from "../Components/Footer";
 import Finnhub from "../api/finnhub";
-import TickerCard from "../Components/Card";
+import {TickerCard,NewsCard} from "../Components/Card";
 
 const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -18,8 +19,8 @@ const Home = () => {
   const indices = ["S&P 500", "NASDAQ", "DJIA", "RUSSELL"];
 
 const [search, setSearch] = useState("");
-// const [quote, setQuote] = useState([]);
 const [error, setError] = useState();
+const [news, setNews] = useState([]);
 const [result, setResult] = useState([]);
 const [watchlist, setWatchlist] = useState([]);
 const [rowInfo, setRowInfo] = useState([]);
@@ -45,6 +46,8 @@ const getTicker = (id) => {
   }); 
 }
 
+//get news for Watchlist
+
 //renders watchlist
 const renderWatchlist = async () => {
   await Axios.get("/users/renderWatchlist", {
@@ -53,6 +56,8 @@ const renderWatchlist = async () => {
     setWatchlist(res.data);
      for (let i = 0; i < res.data.length; i++) {
       placeHolder.push(res.data[i].ticker)
+      await Axios.get(`/users/news/${res.data[i].ticker}`)
+      .then((res) => setNews(...news, res.data))
     }
      for (let i = 0; i < placeHolder.length; i++) {
       await Finnhub.getData(placeHolder[i]).then((res) => {
@@ -94,6 +99,10 @@ const renderWatchlist = async () => {
       {/* Stocks Search */}
       <Grid container item sm={12} lg={12} justify="center">
         <SearchBar onChange={(e)=> setSearch(e.target.value)} onClick={getQuote}/>
+      </Grid>
+      {/* Sector display */}
+      <Grid container sm={6}>
+        <Sector/>
       </Grid>
       {/* Search Result */}
       <Grid container item sm={12} lg={9} justify="center">
@@ -145,6 +154,15 @@ const renderWatchlist = async () => {
       <Grid container item sm={12} lg={3} justify="center">
         <Table rows={rowInfo} />
       </Grid>
+      <Grid container sm={12}>
+        {news.map((item) => {
+          return (
+            <Grid xs={3}>
+          <NewsCard image={item.image} headline={item.headline} summary={item.summary}/>
+          </Grid>
+          )
+        })}
+        </Grid>
       <Footer/>
     </Grid>
   </>
