@@ -31,8 +31,7 @@ const Footer = () => {
   const history = useHistory();
   const educate = () => history.push("/educate");
   const settings = () => history.push("/settings");
-  const about = () => history.push("/about");
-  const disclaimer = () => history.push("/disclaimer");
+  const disclaimer = () => history.push("./Disclaimer");
   return (
     <div className={classes.root}>
       <Grid container className="footerColor">
@@ -57,9 +56,6 @@ const Footer = () => {
               </Link>{" "}
               <Link color="inherit" onClick={settings}>
                 Settings
-              </Link>{" "}
-              <Link color="inherit" onClick={about}>
-                About Us
               </Link>{" "}
               <Link color="inherit" onClick={disclaimer}>
                 Disclaimer
