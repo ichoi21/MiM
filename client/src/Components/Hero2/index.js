@@ -15,7 +15,7 @@ export default class extends React.Component {
       "colorTheme": "dark",
       "dateRange": "3M",
       "exchange": "US",
-      "showChart": true,
+      "showChart": false,
       "locale": "en",
       "width": "100%",
       "height": "100%",
