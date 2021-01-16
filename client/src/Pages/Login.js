@@ -5,7 +5,7 @@ import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import UserContext from "../Context/UserContext";
+import {User} from "../Context/UserContext";
 
 import "./Styles.css";
 
@@ -54,7 +54,7 @@ function Copyright() {
 }
 
 const Login = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(User);
   const [form, setForm] = useState({});
   const history = useHistory();
 

@@ -2,7 +2,7 @@ import { Grid, Card, Link, makeStyles, spacing, Typography } from "@material-ui/
 import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import UserContext from "../Context/UserContext";
+import {User} from "../Context/UserContext";
 import Hero from "../Components/Hero"
 import SearchBar from "../Components/SearchBar/index";
 import SearchContent from "../Components/SearchContent/index"
@@ -14,7 +14,7 @@ import Finnhub from "../api/finnhub";
 import { TickerCard, NewsCard } from "../Components/Card";
 
 const Home = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(User);
   const history = useHistory();
   const indices = ["S&P 500", "NASDAQ", "DJIA", "RUSSELL"];
 

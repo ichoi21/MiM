@@ -7,7 +7,7 @@ import ExitToApp from "@material-ui/icons/ExitToApp";
 import React,{ useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import UserContext from "../../Context/UserContext";
+import {User} from "../../Context/UserContext";
 import logo from "../../Img/Icon.png"
 import { Date, Time } from "../Time/"
 
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
  const Header=()=> {
-  const {userData, setUserData} = useContext(UserContext);
+  const {userData, setUserData} = useContext(User);
   const history = useHistory();
   const scanner = () => history.push("/scanner");
   const dsp = () => history.push("/dsp");
