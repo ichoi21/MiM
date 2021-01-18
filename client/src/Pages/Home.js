@@ -83,7 +83,7 @@ const renderWatchlist = async () => {
 
   return (
     <>
-    <Grid container spacing={2} justify="center" style={{ padding: 25 }}>
+    <Grid container spacing={2} justify="center" style={{ padding: 15 }}>
       {/* Major Indices Cards */}
       <Grid container item sm={12} spacing={2} justify="center" alignItems="center">
         {/* {indices.map((item,index) => {
