@@ -33,7 +33,7 @@ export default class extends React.Component {
         "proName": "BITSTAMP:ETHUSD"
         }
         ],
-        "colorTheme": "light",
+        "colorTheme": "dark",
         "isTransparent": true,
         "showSymbolLogo": false,
         "locale": "en"
