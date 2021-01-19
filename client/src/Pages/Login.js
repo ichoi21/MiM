@@ -1,12 +1,14 @@
-import { Button, Checkbox, CssBaseline, FormControlLabel, Grid, Link, makeStyles, Paper, spacing, TextField, Typography } from "@material-ui/core";
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { Box, Button, Checkbox, CssBaseline, createMuiTheme, FormControlLabel, Grid, Link, makeStyles, Paper, TextField, Typography, ThemeProvider } from "@material-ui/core";
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { green } from '@material-ui/core/colors' ;
 
 import UserContext from "../Context/UserContext";
 
+import logo from "../Img/Icon.png"
 import "./Styles.css";
 
 //left column image url and styling from material ui 
@@ -14,6 +16,7 @@ import "./Styles.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
+    color: theme.palette.text.green,
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/featured/?investment)',
@@ -24,32 +27,38 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center',
   },
   paper: {
-    margin: theme.spacing(8, 4),
+    margin: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(5),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  margin: {
+    margin: theme.spacing(1),
+  },
 }));
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+  },
+});
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="success" align="center">
-      <div className="text">
+    <ThemeProvider theme={theme}>
+      <Typography variant="body2" color="primary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="/">
-        DMi$
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-      </div>
-    </Typography>
+      <Link color="primary" href="/"> 1DSP | Mi$ </Link>{' '}
+      {new Date().getFullYear()} {'.'}
+      </Typography>
+    </ThemeProvider>
   );
 }
 
@@ -96,54 +105,59 @@ const Login = () => {
     <Grid container component="main" className={classes.root} spacing={2}>
       <CssBaseline />
       <Grid item xs={12} sm={4} md={7} className={classes.image}/>
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <div style={{ padding: 20 }}>
-            <Typography component="h3" variant="h5">
-            Welcome Back!
-            </Typography>
-            <form onSubmit={submit}>
-              <TextField input variant="outlined" margin="normal" required fullWidth
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square style={{ padding: 20 }}>
+          <img src={logo} className="logo"/>
+          <Typography component="h3" variant="h5"> Welcome Back! </Typography>
+          <form onSubmit={submit}>
+          <ThemeProvider theme={theme}>
+            <TextField input variant="outlined" margin="normal" required fullWidth
               id="email"
               label="Email Address/Username"
               name="email"
               autoComplete="email"
               autoFocus
               onChange={onChange}
-              />
-              <TextField input variant="outlined" margin="normal" required fullWidth
+            />
+            <TextField input variant="outlined" margin="normal" required fullWidth
               id="password"
               name="password"
               label="Password"
               type="password"
               autoComplete="current-password"
               onChange={onChange}
-              />
-              <FormControlLabel control={<Checkbox value="remember" color="green" />}
+            />
+
+            <FormControlLabel 
+              variant="body2" 
+              control={<Checkbox value="remember" color="primary"/>}
               label="Remember Me"/>
-              <Grid>
-              <Button type="submit" fullWidth variant="contained" color="green">
+            </ThemeProvider>
+            <Box mx={8}>
+            <Grid item xs>
+              <ThemeProvider theme={theme}>
+              <Button type="submit" fullWidth variant="outlined" color="primary" className={classes.margin}>
                 Sign In
               </Button>
-          <Grid container>
-            <Grid item xs>
-              <div className="text">
-              <Link variant="subtitle2" onClick={login}>
-                Forgot password?
-              </Link>
-              </div>
-            </Grid>
-            <Grid item xs className="text">
-              <Link variant="subtitle2" onClick={signup}>
-                Don't have an account? Sign Up
-              </Link>
-            </Grid>
-           </Grid>
-           </Grid>
-           <Box mt={5}>
-           <Copyright />
+              </ThemeProvider>
+
+              <Grid container>
+                <Grid item xs={6} className="text">
+                  <Link  variant="subtitle2" onClick={login}>
+                  Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item xs={6} className="text">
+                  <Link variant="subtitle2" onClick={signup}>
+                  Don't have an account?
+                  </Link>
+                </Grid>
+              </Grid>
+             </Grid>
+             </Box>
+           </form>
+           <Box m={5}>
+            <Copyright />
           </Box>
-        </form>
-      </div>
       </Grid>
     </Grid>
   );
