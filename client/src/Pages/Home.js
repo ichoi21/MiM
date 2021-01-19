@@ -1,8 +1,6 @@
-import { Grid, Card, Link, makeStyles, spacing, Typography } from "@material-ui/core";
-import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import UserContext from "../Context/UserContext";
+import { Box, Grid, Card, Paper, makeStyles } from "@material-ui/core";
+
 import Hero from "../Components/Hero"
 import SearchBar from "../Components/SearchBar/index";
 import SearchContent from "../Components/SearchContent/index"
@@ -10,13 +8,28 @@ import Sector from "../Components/Sector/index"
 // import SymbolWatch from "../Components/SymbolWatch";
 import Table from "../Components/Table/index";
 import Footer from "../Components/Footer";
+
+import "./Styles.css"
+
+import Axios from "axios";
+import { useHistory } from "react-router-dom";
+import UserContext from "../Context/UserContext";
 import Finnhub from "../api/finnhub";
 import { TickerCard, NewsCard } from "../Components/Card";
 
-const Home = () => {
+const useStyles = makeStyles((theme) => ({
+  root: {
+  },
+  paper: {
+    padding: theme.spacing(2),
+    color: theme.palette.text.secondary,
+  },
+}));
+
+export default function Home() {
+  const classes = useStyles();
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
-  const indices = ["S&P 500", "NASDAQ", "DJIA", "RUSSELL"];
 
 const [search, setSearch] = useState("");
 const [error, setError] = useState();
@@ -28,8 +41,6 @@ const [show, setShow] = useState(false);
 const placeHolder = [];
 let rows = [];
 
-
-// grabs info about searched ticker ISSUE: pulls 5 cards
 const getQuote = (e) =>{
   e.preventDefault();
    Finnhub.getData(search).then((res) => {
@@ -81,44 +92,41 @@ const renderWatchlist = async () => {
     renderWatchlist();
   }, [userData.user, history]);
 
+  
   return (
     <>
-    <Grid container spacing={2} justify="center" style={{ padding: 15 }}>
+    <Box mx="auto" p={2} className="home">
+    <Grid container spacing={2} justify="center" direction="row" alignItems="flex-start">
       {/* Major Indices Cards */}
-      <Grid container item sm={12} spacing={2} justify="center" alignItems="center">
-        {/* {indices.map((item,index) => {
-          return (
-            <Grid container item sm={3}>
-              <Card text={item}isShown={true}/> 
-            </Grid>
-            
-          )
-        })} */}
-        <Hero/>
+      <Grid item sm={12}>
+        <Paper className={classes.paper} elevation={2}>
+          <Hero/>
+        </Paper>
       </Grid>
       {/* Stocks Search */}
-      <Grid container item sm={12} lg={12} justify="center">
-        <SearchBar onChange={(e)=> setSearch(e.target.value)} onClick={getQuote}/>
+      <Grid item sm={12}>
+          <SearchBar onChange={(e)=> setSearch(e.target.value)} onClick={getQuote}/>
       </Grid>
       {/* Sector display
       <Grid container item sm={12} lg={12}>
         <Sector/>
       </Grid> */}
       {/* Search Result */}
-      <Grid container item sm={12} lg={9} justify="center">
-        {/* <SymbolWatch/> */}
-        {/* Would like to move 103-143 into its own component named above */}
-        <TickerCard isShown={show}>
-              <p onClick={async () => {
-                let saveTicker = {
-                  ticker:result.symbol,
-                };
-                // adds ticker to watchlist
-                await Axios.post("/users/addWatchlist", saveTicker, {
-                  headers: { "x-auth-token": localStorage.getItem("auth-token") },
-                });
-                console.log("Added to watchlist");
-                renderWatchlist();
+      <Grid item sm={12} md={8} justify="center">
+        <Paper className={classes.paper}>
+          {/* <SymbolWatch/> */}
+          {/* Would like to move 103-143 into its own component named above */}
+          <TickerCard isShown={show}>
+            <p onClick={async () => {
+              let saveTicker = {
+                ticker:result.symbol,
+              };
+              // adds ticker to watchlist
+              await Axios.post("/users/addWatchlist", saveTicker, {
+                headers: { "x-auth-token": localStorage.getItem("auth-token") },
+              });
+              console.log("Added to watchlist");
+              renderWatchlist();
               }}>Add to Watchlist</p>
               <SearchContent 
                 ticker={result.symbol}
@@ -149,24 +157,28 @@ const renderWatchlist = async () => {
                 // // edd={}
                 />
             </TickerCard>
+        </Paper>
       </Grid>
       {/* User's Watchlist */}
-      <Grid container item sm={12} lg={3} justify="center">
-        <Table rows={rowInfo} />
+      <Grid item sm={12} md={4} justify="center">
+        <Paper className={classes.paper}>
+          <Table rows={rowInfo} />
+        </Paper>
       </Grid>
-      <Grid container item sm={12} justify="center">
+      <Grid item sm={12} md={4} justify="center">
         {news.map((item) => {
           return (
             <Card >
-          <NewsCard image={item.image} headline={item.headline} summary={item.summary}/>
-          </Card>
-          )
+              <Paper className={classes.paper}>
+                <NewsCard image={item.image} headline={item.headline} summary={item.summary}/>
+              </Paper>
+            </Card>
+            )
         })}
         </Grid>
-      <Footer/>
     </Grid>
+    </Box>
+    <Footer/>
   </>
     );
 };
-
-export default Home;
