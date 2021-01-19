@@ -1,7 +1,6 @@
 import { AppBar, Button, Drawer, Hidden, List, ListItem, ListItemText, Toolbar, Typography, IconButton, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ExitToApp from '@material-ui/icons/ExitToApp';
-import CancelIcon from '@material-ui/icons/Cancel';
 import HomeIcon from '@material-ui/icons/Home';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
@@ -19,10 +18,7 @@ import "./Header.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    top: 0,
-    maxHeight: "8vh",
-    minHeight: "5vh",
+    maxHeight: "6vh",
     boxShadow: "none",
     backgroundColor: "#343a38",
   },
@@ -45,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     width: "flex",
   },
   content: {
-    flexGrow: 1,
+    flexGrow: 0,
     padding: theme.spacing(3),
   },
   menuButton: {
@@ -121,11 +117,14 @@ const useStyles = makeStyles((theme) => ({
   return (
     <div className={classes.root}>
       <Hidden xsDown implementation="css">
-        <AppBar position="static" className={classes.appBar}>
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar className="parentList">
             {drawer}
           </Toolbar>
         </AppBar>
+        <div className={classes.content}>
+          <div className={classes.toolbar} />
+      </div>
       </Hidden>
       <nav className={classes.drawer}>
         <Hidden smUp implementation="css">
@@ -142,9 +141,7 @@ const useStyles = makeStyles((theme) => ({
           </Drawer>
         </Hidden>
       </nav>
-      <div className={classes.content}>
-        <div className={classes.toolbar} />
-      </div>
+
     </div>
   );
 }
