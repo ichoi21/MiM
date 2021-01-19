@@ -1,28 +1,48 @@
 import React from 'react';
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Button, Card, CardContent, CardActionArea, CardMedia, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
 import Hero2 from "../Components/Hero2";
 import Sector from "../Components/Sector";
-import { makeStyles } from '@material-ui/core/styles';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 
+const useStyles = makeStyles({
+  root: {
+    minWidth: 345,
+    minHeight: 100,
+    textAlign: 'center',
+    color: "#ffffff",
+  },
+  root2: {
+    minWidth: 345,
+    minHeight: 500,
+  },
+  title: {
+    fontSize: 12,
+    color: "#ffffff",
+  },
+  pos: {
+    marginBottom: 5,
+  },
+  media: {
+    height: 140,
+  },
+});
 
 export const TickerCard = (props) => {
+  const classes = useStyles();
   const isShown = props.isShown;
   if (isShown) {
     return (
-        <Card>
+        <Card className={classes.root}>
           <CardContent>
-            <Typography>{props.children}</Typography>
+            <Typography variant="h7">{props.children}</Typography>
           </CardContent>
         </Card>
 
     );
   }
   return (
-    <Card>
+    <Card className={classes.root2}>
       <Sector />
       <Hero2 />
     </Card>
@@ -53,13 +73,3 @@ export const NewsCard = ({image,headline,summary}) => {
     </Card>
   );
 }
-
-
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
-});
