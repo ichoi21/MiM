@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import UserContext from "../Context/UserContext";
+import {User} from "../Context/UserContext";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 import Avatar from '@material-ui/core/Avatar';
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Signup = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(User);
   const [form, setForm] = useState();
   const history = useHistory();
   const [newUser, setNewUser] = useState({

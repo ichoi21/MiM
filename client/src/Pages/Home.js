@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Box, Grid, Card, Paper, makeStyles } from "@material-ui/core";
 
+import {User} from "../Context/UserContext";
 import Hero from "../Components/Hero"
 import SearchBar from "../Components/SearchBar/index";
 import SearchContent from "../Components/SearchContent/index"
@@ -8,9 +9,7 @@ import Sector from "../Components/Sector/index"
 // import SymbolWatch from "../Components/SymbolWatch";
 import Table from "../Components/Table/index";
 import Footer from "../Components/Footer";
-
 import "./Styles.css"
-
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import UserContext from "../Context/UserContext";
@@ -26,9 +25,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home() {
+const Home = () => {
   const classes = useStyles();
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(User);
   const history = useHistory();
 
 const [search, setSearch] = useState("");
@@ -182,3 +181,5 @@ const renderWatchlist = async () => {
   </>
     );
 };
+
+export default Home;
