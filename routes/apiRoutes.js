@@ -14,6 +14,7 @@ router.get("/quote/:symbol", async (req,res) => {
     let result;
     const symbol = req.params.symbol;
     await Axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.IEX_TOKEN}`)
+    await Axios.get()
     .then((res) => result = res.data)
 
     res.send(result)
