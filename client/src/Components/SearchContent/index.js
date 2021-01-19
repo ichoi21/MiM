@@ -6,12 +6,26 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-  import TradeView from 'react-tradingview-widget'
+import TradeView from 'react-tradingview-widget'
 
-const index = ({ticker, open, vol, marketCap, fwh, fwl, pefwd, eps, turnover, pturnover, sharesOut, ffmc , threeMonth, name, last, high, low,range, pettm, dividend, divYield, pb, freeFloat, beta, edd, lotSize}) => {
+const useStyles = makeStyles({
+  root: {
+    minWidth: 50,
+    minHeight: 100,
+    textAlign: 'center',
+    color: 'white',
+  },
+  title: {
+    fontSize: 12,
+    color: "#fffff0",
+  },
+});
+
+const Results = ({ticker, open, vol, marketCap, fwh, fwl, pefwd, eps, turnover, pturnover, sharesOut, ffmc , threeMonth, name, last, high, low,range, pettm, dividend, divYield, pb, freeFloat, beta, edd, lotSize}) => {
+  const classes = useStyles();
   return (
     <>
-    <Grid container sm={12}>
+    <Grid container sm={12} className={classes.root}>
       <TableContainer hoverable striped>
         <Table aria-label="simple table">
           <TableHead><TableRow>{name} ({ticker} - primaryExchange)</TableRow></TableHead>
@@ -62,4 +76,4 @@ const index = ({ticker, open, vol, marketCap, fwh, fwl, pefwd, eps, turnover, pt
   )
 }
 
-export default index;
+export default Results;
