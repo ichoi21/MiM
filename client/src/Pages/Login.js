@@ -1,6 +1,4 @@
 import { Box, Button, Checkbox, CssBaseline, createMuiTheme, FormControlLabel, Grid, Link, makeStyles, Paper, TextField, Typography, ThemeProvider } from "@material-ui/core";
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
