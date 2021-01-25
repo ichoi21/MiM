@@ -12,7 +12,6 @@ import Footer from "../Components/Footer";
 import "./Styles.css"
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
-import UserContext from "../Context/UserContext";
 import Finnhub from "../api/finnhub";
 import { TickerCard, NewsCard } from "../Components/Card";
 
@@ -32,19 +31,19 @@ const Home = () => {
 
 const [search, setSearch] = useState("");
 const [error, setError] = useState();
-const [news, setNews] = useState([]);
 const [result, setResult] = useState([]);
+const [news, setNews] = useState([]);
 const [watchlist, setWatchlist] = useState([]);
 const [rowInfo, setRowInfo] = useState([]);
 const [show, setShow] = useState(false);
 const placeHolder = [];
 let rows = [];
 
-const getQuote = (e) =>{
+const getQuote = (e) => {
   e.preventDefault();
-   Finnhub.getData(search).then((res) => {
+   Finnhub.getData("TSLA").then((res) => {
     console.log(res);
-    setResult(res.data);
+    // setResult(res.data);
     setShow(true);
   });
 }
@@ -59,36 +58,37 @@ const getTicker = (id) => {
 //get news for Watchlist
 
 //renders watchlist
-const renderWatchlist = async () => {
-  await Axios.get("/users/renderWatchlist", {
-    headers: { "x-auth-token": localStorage.getItem("auth-token") },
-  }).then(async (res) => {
-    setWatchlist(res.data);
-     for (let i = 0; i < res.data.length; i++) {
-      placeHolder.push(res.data[i].ticker)
-      await Axios.get(`/users/news/${res.data[i].ticker}`)
-      .then((res) => setNews(...news, res.data))
-    }
-     for (let i = 0; i < placeHolder.length; i++) {
-      await Finnhub.getData(placeHolder[i]).then((res) => {
-        let item = {
-          symbol: res.data.symbol,
-          name: res.data.companyName,
-          last: res.data.latestPrice,
-          high: res.data.high,
-          low:  res.data.low,
-          vol: res.data.latestVolume,
-        }
-        rows.push(item)
-      })
-    }
-    setRowInfo(rows);
-  });
-};
+// const renderWatchlist = async () => {
+//   await Axios.get("/users/renderWatchlist", {
+//     headers: { "x-auth-token": localStorage.getItem("auth-token") },
+//   }).then(async (res) => {
+//     setWatchlist(res.data);
+//      for (let i = 0; i < res.data.length; i++) {
+//       placeHolder.push(res.data[i].ticker)
+//       await Axios.get(`/users/news/${res.data[i].ticker}`)
+//       .then((res) => setNews(...news, res.data))
+//     }
+//      for (let i = 0; i < placeHolder.length; i++) {
+//       await Finnhub.getData(placeHolder[i]).then((res) => {
+//         let item = {
+//           symbol: res.data.symbol,
+//           name: res.data.companyName,
+//           last: res.data.latestPrice,
+//           high: res.data.high,
+//           low:  res.data.low,
+//           vol: res.data.latestVolume,
+//         }
+//         rows.push(item)
+//       })
+//     }
+//     setRowInfo(rows);
+//   });
+// };
 
   useEffect(() => {
     if (!userData.user) history.push("/login");
-    renderWatchlist();
+    // renderWatchlist();
+    // getQuote();
   }, [userData.user, history]);
 
   
@@ -115,7 +115,7 @@ const renderWatchlist = async () => {
         <Paper className={classes.paper}>
           {/* <SymbolWatch/> */}
           {/* Would like to move 103-143 into its own component named above */}
-          <TickerCard isShown={show}>
+          {/* <TickerCard isShown={show}>
             <p onClick={async () => {
               let saveTicker = {
                 ticker:result.symbol,
@@ -155,7 +155,7 @@ const renderWatchlist = async () => {
                 // beta={result.financial.metric.beta}
                 // // edd={}
                 />
-            </TickerCard>
+            </TickerCard> */}
         </Paper>
       </Grid>
       {/* User's Watchlist */}
