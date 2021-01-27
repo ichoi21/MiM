@@ -2,6 +2,25 @@ import React, { useState,  useEffect } from "react";
 import Finnhub from "../api/finnhub";
 import Axios from "axios";
 
+
+// this creates global state for ticker search bar
+export const SearchContext = React.createContext({
+    ticker: {
+        value: "",
+        onChange: () => {},
+      },
+});
+
+export const Search = () => {
+    const [ticker, setTicker] = useState();
+    return {
+        name: {
+            value: ticker,
+            onChange: (e) => setTicker(e.target.value),
+          }
+        } 
+}
+
 // this creates context for searchcontent component
 export const TickerContext = React.createContext(); 
 
@@ -11,7 +30,7 @@ const objectResult = {
     rows: "Test",
 }
 
- const Ticker = ({children}) => {
+export const Ticker = ({children}) => {
     const [state, setState] = useState(objectResult);
     useEffect(() => {
         renderWatchlist();
@@ -21,6 +40,7 @@ const objectResult = {
         <TickerContext.Provider value={[state,setState]}>{children}</TickerContext.Provider>
     )
 }
+
 
 
 const renderWatchlist = async () => {
@@ -54,4 +74,34 @@ const renderWatchlist = async () => {
     });
   };
 
-  export default Ticker;
+
+
+  //get news for Watchlist
+
+//renders watchlist
+// const renderWatchlist = async () => {
+//   await Axios.get("/users/renderWatchlist", {
+//     headers: { "x-auth-token": localStorage.getItem("auth-token") },
+//   }).then(async (res) => {
+//     setWatchlist(res.data);
+//      for (let i = 0; i < res.data.length; i++) {
+//       placeHolder.push(res.data[i].ticker)
+//       await Axios.get(`/users/news/${res.data[i].ticker}`)
+//       .then((res) => setNews(...news, res.data))
+//     }
+//      for (let i = 0; i < placeHolder.length; i++) {
+//       await Finnhub.getData(placeHolder[i]).then((res) => {
+//         let item = {
+//           symbol: res.data.symbol,
+//           name: res.data.companyName,
+//           last: res.data.latestPrice,
+//           high: res.data.high,
+//           low:  res.data.low,
+//           vol: res.data.latestVolume,
+//         }
+//         rows.push(item)
+//       })
+//     }
+//     setRowInfo(rows);
+//   });
+// };

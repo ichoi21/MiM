@@ -43,7 +43,6 @@ const getQuote = (e) => {
   e.preventDefault();
    Finnhub.getData("TSLA").then((res) => {
     console.log(res);
-    // setResult(res.data);
     setShow(true);
   });
 }
@@ -55,40 +54,8 @@ const getTicker = (id) => {
   }); 
 }
 
-//get news for Watchlist
-
-//renders watchlist
-// const renderWatchlist = async () => {
-//   await Axios.get("/users/renderWatchlist", {
-//     headers: { "x-auth-token": localStorage.getItem("auth-token") },
-//   }).then(async (res) => {
-//     setWatchlist(res.data);
-//      for (let i = 0; i < res.data.length; i++) {
-//       placeHolder.push(res.data[i].ticker)
-//       await Axios.get(`/users/news/${res.data[i].ticker}`)
-//       .then((res) => setNews(...news, res.data))
-//     }
-//      for (let i = 0; i < placeHolder.length; i++) {
-//       await Finnhub.getData(placeHolder[i]).then((res) => {
-//         let item = {
-//           symbol: res.data.symbol,
-//           name: res.data.companyName,
-//           last: res.data.latestPrice,
-//           high: res.data.high,
-//           low:  res.data.low,
-//           vol: res.data.latestVolume,
-//         }
-//         rows.push(item)
-//       })
-//     }
-//     setRowInfo(rows);
-//   });
-// };
-
   useEffect(() => {
     if (!userData.user) history.push("/login");
-    // renderWatchlist();
-    // getQuote();
   }, [userData.user, history]);
 
   
@@ -104,7 +71,7 @@ const getTicker = (id) => {
       </Grid>
       {/* Stocks Search */}
       <Grid item sm={12}>
-          <SearchBar onChange={(e)=> setSearch(e.target.value)} onClick={getQuote}/>
+          {/* <SearchBar onChange={(e)=> setSearch(e.target.value)} onClick={getQuote}/> */}
       </Grid>
       {/* Sector display
       <Grid container item sm={12} lg={12}>
@@ -165,7 +132,7 @@ const getTicker = (id) => {
         </Paper>
       </Grid>
       <Grid item sm={12} md={4} justify="center">
-        {news.map((item) => {
+        {/* {news.map((item) => {
           return (
             <Card >
               <Paper className={classes.paper}>
@@ -173,7 +140,7 @@ const getTicker = (id) => {
               </Paper>
             </Card>
             )
-        })}
+        })} */}
         </Grid>
     </Grid>
     </Box>

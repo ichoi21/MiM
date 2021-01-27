@@ -67,7 +67,6 @@ const Login = () => {
 
   const submit = async (e) => {
     e.preventDefault();
-    console.log(form);
 
     try {
       const loginRes = await Axios.post("/users/login", {
