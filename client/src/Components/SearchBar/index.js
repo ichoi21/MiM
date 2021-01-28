@@ -13,10 +13,12 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 // function to get quote
+let quoteResult = {};
 const getQuote = ( ticker) => {
   
    Finnhub.getData(ticker).then((res) => {
-    console.log(res);
+    quoteResult = res.data;
+    console.log(res.data);
   });
 }
 
@@ -47,7 +49,7 @@ export const SearchBar = () => {
 }
 
 // this creates global state for quote info
-export const QuoteContext = React.createContext(); 
+export const QuoteContext = React.createContext(quoteResult); 
 
 
 export const QuoteContent = ({children}) => {

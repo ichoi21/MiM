@@ -27,7 +27,7 @@ export const TickerContext = React.createContext();
 const objectResult = {
     watchList: [],
     news: [],
-    rows: "Test",
+    rows: [],
 }
 
 export const Ticker = ({children}) => {
@@ -58,19 +58,19 @@ const renderWatchlist = async () => {
         })
         objectResult.news = newsPlaceholder;
       }
-    //    for (let i = 0; i < placeHolder.length; i++) {
-    //     await Finnhub.getData(placeHolder[i]).then((res) => {
-    //       let item = {
-    //         symbol: res.data.symbol,
-    //         name: res.data.companyName,
-    //         last: res.data.latestPrice,
-    //         high: res.data.high,
-    //         low:  res.data.low,
-    //         vol: res.data.latestVolume,
-    //       }
-    //     objectResult.rows.push(item);
-    //     })
-    //   }
+       for (let i = 0; i < placeHolder.length; i++) {
+        await Finnhub.getData(placeHolder[i]).then((res) => {
+          let item = {
+            symbol: res.data.quote.symbol,
+            name: res.data.quote.companyName,
+            last: res.data.quote.latestPrice,
+            high: res.data.quote.high,
+            low:  res.data.quote.low,
+            vol: res.data.quote.latestVolume,
+          }
+        objectResult.rows.push(item);
+        })
+      }
     });
   };
 

@@ -5,6 +5,7 @@ import Test from '../Components/Test'
 import {User} from "../Context/UserContext";
 import { useHistory } from "react-router-dom";
 import {SearchBar} from '../Components/SearchBar/index'
+import Results from '../Components/SearchContent/index'
 
 const Portfolio = () => {
     const { userData, setUserData } = useContext(User);
@@ -18,6 +19,7 @@ const Portfolio = () => {
         <Ticker>
             <Test/>
             <SearchBar/>
+            {/* <Results/> */}
             <Footer />
         </Ticker>
     )

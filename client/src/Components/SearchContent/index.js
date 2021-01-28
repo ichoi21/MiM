@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Grid, Link, makeStyles, spacing, Typography, Paper } from "@material-ui/core";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TradeView from 'react-tradingview-widget'
+// import {QuoteContext} from '../../Components/SearchBar/index'
 
 const useStyles = makeStyles({
   root: {
@@ -23,13 +24,14 @@ const useStyles = makeStyles({
 
 const Results = ({ticker, open, vol, marketCap, fwh, fwl, pefwd, eps, turnover, pturnover, sharesOut, ffmc , threeMonth, name, last, high, low,range, pettm, dividend, divYield, pb, freeFloat, beta, edd, lotSize}) => {
   const classes = useStyles();
+  // const [state, setState] = useContext(QuoteContext);
   return (
     <>
     <Grid container sm={12} className={classes.root}>
       <TableContainer hoverable striped>
         <Table aria-label="simple table">
-          <TableHead><TableRow>{name} ({ticker} - primaryExchange)</TableRow></TableHead>
-            <TableBody>
+          <TableHead><TableRow>{state.quote.name} ({state.quote.ticker} - primaryExchange)</TableRow></TableHead>
+            {/* <TableBody>
               <TableRow>
                 <TableCell>$latestPrice</TableCell>
                 <TableCell>latestPercent%</TableCell>
@@ -65,7 +67,7 @@ const Results = ({ticker, open, vol, marketCap, fwh, fwl, pefwd, eps, turnover, 
               <TableCell>P/E Ratio:</TableCell>
               <TableCell>peRatio %</TableCell>
             </TableRow>
-          </TableBody>
+          </TableBody> */}
         </Table>
       </TableContainer>
     </Grid>
