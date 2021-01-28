@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import {SearchContext, Search} from '../../Context/TickerContext'
-
+import Finnhub from "../../api/finnhub";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,6 +12,13 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+// function to get quote
+const getQuote = ( ticker) => {
+  
+   Finnhub.getData(ticker).then((res) => {
+    console.log(res);
+  });
+}
 
 // SearchForm builds the component
 export const SearchForm = (props) => {
@@ -24,7 +31,7 @@ export const SearchForm = (props) => {
       InputProps={{ 'aria-label': 'search' }}
       autoComplete="off"
     ><SearchIcon /></TextField>
-    <Button onClick={props.onClick} color="success"><SearchIcon color="primary"/></Button>
+    <Button onClick={() => getQuote(searchModel.name.value)} color="success"><SearchIcon color="primary"/></Button>
 </form>
   );
 }
@@ -37,4 +44,15 @@ export const SearchBar = () => {
       <SearchForm/>
     </SearchContext.Provider>
   )
+}
+
+// this creates global state for quote info
+export const QuoteContext = React.createContext(); 
+
+
+export const QuoteContent = ({children}) => {
+    const [state, setState] = useState();
+    return (
+        <QuoteContext.Provider value={[state,setState]}>{children}</QuoteContext.Provider>
+    )
 }
