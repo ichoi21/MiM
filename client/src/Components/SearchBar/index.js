@@ -12,16 +12,6 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-// function to get quote
-let quoteResult = {};
-const getQuote = ( ticker) => {
-  
-   Finnhub.getData(ticker).then((res) => {
-    quoteResult = res.data;
-    console.log(res.data);
-  });
-}
-
 // SearchForm builds the component
 export const SearchForm = (props) => {
   const classes = useStyles();
@@ -48,13 +38,26 @@ export const SearchBar = () => {
   )
 }
 
+// function to get quote
+const quoteResult = {
+  isShown: false,
+  result: [],
+};
+const getQuote = ( ticker) => {
+   Finnhub.getData(ticker).then((res) => {
+    quoteResult.result = res.data;
+    quoteResult.isShown = true;
+    console.log(quoteResult);
+  });
+}
+
 // this creates global state for quote info
-export const QuoteContext = React.createContext(quoteResult); 
+export const QuoteContext = React.createContext(); 
 
 
 export const QuoteContent = ({children}) => {
-    const [state, setState] = useState();
+    const state = useState(quoteResult);
     return (
-        <QuoteContext.Provider value={[state,setState]}>{children}</QuoteContext.Provider>
+        <QuoteContext.Provider value={state}>{children}</QuoteContext.Provider>
     )
 }
