@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TradeView from 'react-tradingview-widget'
-import {QuoteContext} from '../../Components/SearchBar/index'
+import {QuoteContext,QuoteContent} from '../../Components/SearchBar/index'
 
 const useStyles = makeStyles({
   root: {
@@ -27,10 +27,12 @@ const Results = () => {
   const classes = useStyles();
   const state = useContext(QuoteContext);
 
-  if (state[0].result === []){
+  // problem is that result is empty and show as undefined. result will only have content
+  // after doing the seach. so need to have the object built out to have empty content 
+  // need to work on search
+  
     return (
-
-      <>
+      <QuoteContent>
       <Grid container sm={12} className={classes.root}>
         <TableContainer hoverable striped>
           <Table aria-label="simple table">
@@ -40,11 +42,11 @@ const Results = () => {
                   <TableCell>$latestPrice</TableCell>
                   <TableCell>latestPercent%</TableCell>
                   <TableCell>latestTime</TableCell>
-                  <button onClick={()=> console.log(state[0].result.quote.companyName)}>Test</button>
+                  <button onClick={()=> console.log(state)}>Test</button>
                 </TableRow>
               <TableRow>
                 <TableCell>Open:</TableCell>
-                <TableCell>${state[0].result.quote.companyName}</TableCell>
+                <TableCell>${state.companyName.value}</TableCell>
                 <TableCell>Prev Close:</TableCell>
                 {/* <TableCell>${last}</TableCell> */}
               </TableRow>
@@ -79,15 +81,11 @@ const Results = () => {
       <Grid container>
         {/* <TradeView autosize symbol={state.result.quote.symbol} /> */}
       </Grid>
-      </> 
+      </QuoteContent>
     )
   }
-  else {
-    return (
-      <>
-      </>
-    )
-  }
-}
+  
+  
+
 
 export default Results;

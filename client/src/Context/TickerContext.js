@@ -46,6 +46,7 @@ export const Ticker = ({children}) => {
 const renderWatchlist = async () => {
     let newsPlaceholder =[];
     let placeHolder = [];
+    let rowPlaceholder = [];
     await Axios.get("/users/renderWatchlist", {
       headers: { "x-auth-token": localStorage.getItem("auth-token") },
     }).then(async (res) => {
@@ -68,9 +69,10 @@ const renderWatchlist = async () => {
             low:  res.data.quote.low,
             vol: res.data.quote.latestVolume,
           }
-        objectResult.rows.push(item);
+          rowPlaceholder.push(item);
         })
       }
+      objectResult.rows = rowPlaceholder;
     });
   };
 
