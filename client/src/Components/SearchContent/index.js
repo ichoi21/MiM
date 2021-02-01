@@ -32,7 +32,7 @@ const Results = () => {
   // need to work on search
   
     return (
-      <QuoteContent>
+      <QuoteContent value={state}>
       <Grid container sm={12} className={classes.root}>
         <TableContainer hoverable striped>
           <Table aria-label="simple table">
@@ -46,7 +46,7 @@ const Results = () => {
                 </TableRow>
               <TableRow>
                 <TableCell>Open:</TableCell>
-                <TableCell>${state.companyName.value}</TableCell>
+                {/* <TableCell onChange={()=>}>${state.result.quote.companyName}</TableCell> */}
                 <TableCell>Prev Close:</TableCell>
                 {/* <TableCell>${last}</TableCell> */}
               </TableRow>
