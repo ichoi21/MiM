@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { green } from '@material-ui/core/colors' ;
 
-import UserContext from "../Context/UserContext";
+import {User} from "../Context/UserContext";
 
 import logo from "../Img/Icon.png"
 import "./Styles.css";
@@ -61,7 +61,7 @@ function Copyright() {
 }
 
 const Login = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(User);
   const [form, setForm] = useState({});
   const history = useHistory();
 
@@ -74,7 +74,6 @@ const Login = () => {
 
   const submit = async (e) => {
     e.preventDefault();
-    console.log(form);
 
     try {
       const loginRes = await Axios.post("/users/login", {

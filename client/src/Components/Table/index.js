@@ -1,6 +1,8 @@
 import { MDBDataTableV5 } from 'mdbreact';
 import React from 'react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import {TickerContext} from '../../Context/TickerContext'
+
 
 const Table = (props) => {
 
@@ -44,17 +46,19 @@ const Table = (props) => {
         width: 100,
       },
     ];
-let rows = props.rows;
+
+  const [state, setState] = React.useContext(TickerContext);
+
   const data = {
     columns: columns,
-    rows: rows,
+    rows: state.rows,
   };
   const [checkbox1, setCheckbox1] = React.useState([]);
 
   const showLogs2 = (e) => {
     setCheckbox1(e);
   };
-
+  
 
   return <MDBDataTableV5 
   striped 

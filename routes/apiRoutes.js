@@ -11,10 +11,12 @@ const User = require("../models/userModel");
 
 router.get("/quote/:symbol", async (req,res) => {
   try {
-    let result;
+    let result = {};
     const symbol = req.params.symbol;
     await Axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.IEX_TOKEN}`)
-    .then((res) => result = res.data)
+    .then((res) => result.quote = res.data)
+    await Axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${process.env.IEX_TOKEN}`)
+    .then((res) => result.advancedStats = res.data)
 
     res.send(result)
   } catch(err){

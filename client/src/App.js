@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 
 import Header from "./Components/Header";
-import UserContext from "./Context/UserContext";
+import {User} from "./Context/UserContext";
 import Dsp from "./Pages/Dsp";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
@@ -56,7 +56,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <UserContext.Provider value={{ userData, setUserData }}>
+        <User.Provider value={{ userData, setUserData }}>
           {userData.user ? (
             <>
             <Header/>
@@ -77,7 +77,7 @@ function App() {
             <Route path="/disclaimer" component={Disclaimer} />
          
           </Switch>
-        </UserContext.Provider>
+        </User.Provider>
       </BrowserRouter>
     </div>
   );

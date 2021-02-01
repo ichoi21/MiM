@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Hero2 from "../Components/Hero2";
 import Sector from "../Components/Sector";
+import {TickerContext} from '../Context/TickerContext';
 
 const useStyles = makeStyles({
   root: {
@@ -49,27 +50,35 @@ export const TickerCard = (props) => {
   );
 };
 
-export const NewsCard = ({image,headline,summary}) => {
+export const NewsCard = () => {
 
   const classes = useStyles();
+  const [state, setState] = React.useContext(TickerContext);
 
   return (
-    <Card className={classes.root}>
+    <>
+    {state.news.map((item) => {
+      return (
+      <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={image}
-          title={headline}
+          image={item[0].image}
+          title={item[0].headline}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {headline}
+            {item[0].headline}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {summary}
+            {item[0].summary}
           </Typography>
         </CardContent>
       </CardActionArea>
     </Card>
+    )
+    })}
+    
+    </>
   );
 }
