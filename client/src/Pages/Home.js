@@ -104,7 +104,9 @@ const renderWatchlist = async () => {
       </Grid>
       {/* Stocks Search */}
       <Grid item sm={12}>
+        <Paper className={classes.paper} elevation={3}>
           <SearchBar onChange={(e)=> setSearch(e.target.value)} onClick={getQuote}/>
+        </Paper>
       </Grid>
       {/* Sector display
       <Grid container item sm={12} lg={12}>
