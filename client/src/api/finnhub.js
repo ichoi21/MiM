@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
     getData: (props) =>
     axios({
-        'method':'GET',
+        method:'get',
         url: `/users/quote/${props}`,
         params: props,
     })
