@@ -10,7 +10,7 @@ A dashboard which assist the user with their stocks investment portfolio.
 -USER will have stock fundamental (Market News, Company News, Earning Reports)
 -USER can create an authenticated account to save their program in a private database
 -USER and review Estimates, Price, Indices, (ETFs, ForEx, Crypto)
--Watchlist will have filters and sorts for Swing Price Exit Potential
+-Watchlist will have filters and sorts for INFO to Swing
 ```
 
 ## Team Members
@@ -34,6 +34,7 @@ In development - [GitHub](https://github.com/ichoi21/MiM)
 ```
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
+    "@material-ui/icons": "^4.11.2",
     "axios": "^0.20.0",
     "bcryptjs": "^2.4.3",
     "chart.js": "^2.9.4",
@@ -41,7 +42,10 @@ In development - [GitHub](https://github.com/ichoi21/MiM)
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.10"
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.32",
+    "mongoose": "^5.10.10",
+    "react-tradingview-widget": "^1.3.2"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
@@ -68,7 +72,6 @@ In development - [GitHub](https://github.com/ichoi21/MiM)
 ## Future Development
 
 - Technical Analysis
-- Premium Stock Fundamentals
 - WebSocket
 - Webhook
 - New Widgets
