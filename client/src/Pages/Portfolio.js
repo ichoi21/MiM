@@ -6,6 +6,7 @@ import {User} from "../Context/UserContext";
 import { useHistory } from "react-router-dom";
 import {SearchBar,quoteContent, QuoteContent} from '../Components/SearchBar/index'
 import Results from '../Components/SearchContent/index'
+import {Calls} from '../Context/CallContext'
 
 const Portfolio = () => {
     const { userData, setUserData } = useContext(User);
@@ -17,7 +18,9 @@ const Portfolio = () => {
     
     return (
         <Ticker>
+            <Calls>
             <Test/>
+            </Calls>
             <SearchBar/>
             <QuoteContent>
                 <Results/>
