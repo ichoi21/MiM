@@ -14,7 +14,7 @@
     "build": "cd client/ && npm install && npm run build"
   },
   "keywords": [],
-  "author": "Michelle, Myhkas, Ian, Danielle",
+  "author": "Myhkas, Ian",
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
