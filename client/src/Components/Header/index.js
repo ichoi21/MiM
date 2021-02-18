@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   const sectionLinks = [
       <Button color="inherit" onClick={portfolio}>Portfolio</Button>,
       <Button color="inherit" onClick={scanner}>Scanner</Button>,
-      <Button color="inherit" onClick={dsp}>1DSP</Button>,
+      <Button color="inherit" onClick={dsp}>Calls/Results</Button>,
       <Button color="inherit" onClick={logout}>Logout<ExitToApp /></Button>
   ];
 
