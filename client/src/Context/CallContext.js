@@ -3,7 +3,7 @@ import Tabletop from 'tabletop'
 
 export const CallContext = React.createContext(); 
 
-export const Calls = ({children}) => {
+export const Call = ({children}) => {
     const [state, setState] = useState();
     useEffect(() => {
         Tabletop.init({
