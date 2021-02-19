@@ -1,46 +1,101 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Tabletop from 'tabletop';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import CallTable from '../CallTable';
 
-import "./Calls.css";
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-const useStyles = makeStyles({
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`wrapped-tabpanel-${index}`}
+      aria-labelledby={`wrapped-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `wrapped-tab-${index}`,
+    'aria-controls': `wrapped-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
   },
-});
+}));
 
-export default function CenteredTabs() {
+export default function TabsWrappedLabel() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState('one');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  
-    
   };
 
   return (
-    <Paper className={classes.root}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="secondary"
-        textColor="secondary"
-        centered
-      >
-        <Tab label="OTCs"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT0GQG1iBHHjgDewLi2dWygWwz8K4xZARMT8mD3lx5hk_bo1VGAS7oakKjzJI8c10ex2MKJlRt06lAt/pubhtml?gid=824718674&amp;single=true&amp;widget=true&amp;headers=false"></iframe></Tab>
-        <Tab label="Doc's Prediction" />
-        <Tab label="Day Trades" />
-        <Tab label="EODs" />
-        <Tab label="Options" />
-        <Tab label="Swings" />
-        <Tab label="Dividends" />
-        <Tab label="Shorts" />
-      </Tabs>
-    </Paper>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Tabs value={value} onChange={handleChange} aria-label="wrapped label tabs example">
+          <Tab
+            value="one"
+            label="Doc's Prediction"
+            wrapped
+            {...a11yProps('one')}
+          />
+          <Tab value="two" label="Day Trades" {...a11yProps('two')} />
+          <Tab value="three" label="EODs" {...a11yProps('three')} />
+          <Tab value="four" label="Options" {...a11yProps('four')}/>
+          <Tab value="five" label="Swings" {...a11yProps('five')}/>
+          <Tab value="six" label="Dividends" {...a11yProps('six')}/>
+          <Tab value="seven" label="Shorts" {...a11yProps('seven')}/>
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index="one">
+        <CallTable/>
+      </TabPanel>
+      <TabPanel value={value} index="two">
+      <CallTable/>
+      </TabPanel>
+      <TabPanel value={value} index="three">
+      <CallTable/>
+      </TabPanel>
+      <TabPanel value={value} index="four">
+      <CallTable/>
+      </TabPanel>
+      <TabPanel value={value} index="five">
+      <CallTable/>
+      </TabPanel>
+      <TabPanel value={value} index="six">
+      <CallTable/>
+      </TabPanel>
+      <TabPanel value={value} index="seven">
+      <CallTable/>
+      </TabPanel>
+    </div>
   );
 }
+
