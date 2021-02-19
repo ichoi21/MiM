@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import CallTable from '../CallTable';
+import {Call} from '../../Context/CallContext'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,6 +75,7 @@ export default function TabsWrappedLabel() {
           <Tab value="seven" label="Shorts" {...a11yProps('seven')}/>
         </Tabs>
       </AppBar>
+      <Call>
       <TabPanel value={value} index="one">
         <CallTable/>
       </TabPanel>
@@ -95,6 +97,7 @@ export default function TabsWrappedLabel() {
       <TabPanel value={value} index="seven">
       <CallTable/>
       </TabPanel>
+      </Call>
     </div>
   );
 }
