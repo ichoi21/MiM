@@ -4,10 +4,10 @@ import Tabletop from 'tabletop'
 export const CallContext = React.createContext(); 
 
 export const Call = ({children}) => {
-    const [state, setState] = useState();
+    const [state, setState] = useState([]);
     useEffect(() => {
         Tabletop.init({
-          key: "1U6TSbaFh_IsY9nf18-IrgvUDP-vLarTAhR-HqpLOk8w",
+          key: "1kWHv399P59gEJ_ajmPg0VMTu-1wRutq08ShzoZo1TLk",
           simpleSheet: true,
         }).then((data) => {
           setState(data);
