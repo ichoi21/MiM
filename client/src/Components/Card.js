@@ -82,3 +82,10 @@ export const NewsCard = () => {
     </>
   );
 }
+
+export const SearchPageKeyCard = () => {
+  return (
+    <>
+    </>
+  )
+}
