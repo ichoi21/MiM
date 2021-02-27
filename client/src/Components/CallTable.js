@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import {CallContext} from '../Context/CallContext';
+import Circular from './Loading/index'
 
 const columns = [
   { field: 'date', headerName: 'Date', width: 100 },
@@ -23,9 +24,10 @@ const columns = [
 
 export default function CallTable() {
     const [state,setState] = React.useContext(CallContext);
+    
   return (
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={state} columns={columns} pageSize={5} checkboxSelection />
+      <DataGrid rows={state} columns={columns} pageSize={5} checkboxSelection/>
     </div>
   );
 }

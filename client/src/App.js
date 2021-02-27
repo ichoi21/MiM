@@ -13,7 +13,7 @@ import Settings from "./Pages/Settings";
 import Signup from "./Pages/Signup";
 import Educate from "./Pages/Educate";
 import Disclaimer from "./Pages/Disclaimer";
-
+import SearchPage from "./Pages/SearchPage";
 import "./App.css";
 
 // import SignIn from "./Components/SignIn";
@@ -75,6 +75,7 @@ function App() {
             <Route path="/Dsp" component={Dsp} />
             <Route path="/educate" component={Educate} />
             <Route path="/disclaimer" component={Disclaimer} />
+            <Route path="/search" component ={SearchPage} />
          
           </Switch>
         </User.Provider>
