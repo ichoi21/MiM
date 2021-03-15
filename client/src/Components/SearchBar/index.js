@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, TextField, Paper } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
 // SearchForm builds the component
 export const SearchForm = (props) => {
+  const history = useHistory();
   const classes = useStyles();
   const searchModel = React.useContext(SearchContext);
 
@@ -25,7 +27,7 @@ export const SearchForm = (props) => {
       InputProps={{ 'aria-label': 'search' }}
       autoComplete="off"
     ><SearchIcon /></TextField>
-    <Button onClick={() => getQuote(searchModel.name.value)} color="success"><SearchIcon color="primary"/></Button>
+    <Button onClick={() => {getQuote(searchModel.name.value); history.push(`/search/$${searchModel.name.value}`)}} color="success"><SearchIcon color="primary"/></Button>
     </Paper>
     </Box>
 </form>

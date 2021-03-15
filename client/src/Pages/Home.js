@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Box, Grid, Card, Paper, makeStyles } from "@material-ui/core";
 import {User} from "../Context/UserContext";
 import Hero from "../Components/Hero"
-// import SearchBar from "../Components/SearchBar/index";
+import {SearchBar} from "../Components/SearchBar/index";
 // import SearchContent from "../Components/SearchContent/index"
 import Sector from "../Components/Sector/index"
 import Table from "../Components/Table/index";
@@ -41,7 +41,7 @@ const Home = () => {
         </Paper>
       </Grid>
       {/* Stocks Search */}
-      {/* <SearchBar/> */}
+      <SearchBar/>
       <Grid item sm={12}>
         <Paper className={classes.paper} elevation={3}>
            {/* <SearchBar onChange={(e)=> setSearch(e.target.value)} onClick={getQuote}/> */}
