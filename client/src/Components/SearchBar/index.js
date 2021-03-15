@@ -27,7 +27,7 @@ export const SearchForm = (props) => {
       InputProps={{ 'aria-label': 'search' }}
       autoComplete="off"
     ><SearchIcon /></TextField>
-    <Button onClick={() => {getQuote(searchModel.name.value); history.push("/search")}} color="success"><SearchIcon color="primary"/></Button>
+    <Button onClick={() => {getQuote(searchModel.name.value); history.push(`/search/$${searchModel.name.value}`)}} color="success"><SearchIcon color="primary"/></Button>
     </Paper>
     </Box>
 </form>
